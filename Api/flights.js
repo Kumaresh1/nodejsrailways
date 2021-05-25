@@ -76,7 +76,7 @@ console.log(req.params);
  // console.log(data);
   res.json(out);  
   
-  res.json("ok ok");
+
 });
 
 
