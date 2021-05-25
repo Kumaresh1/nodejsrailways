@@ -10,18 +10,26 @@ const data = new mongoose.Schema({
   TrainName: {
     type: String
   },
-  StartTime: {
+  ArrivalTime: {
     type: String
   },
-  EndTime: {
+  DestinationTime: {
     type: String
   },
   seats: {
     type: Number
   },
+  Fare: {
+    type: Number
+  },
+  
+  TotalTime: {
+    type: Number
+  },
+  
  date:{
       type:String,
-      default: "24/05/2021"
+      default: Date.now
   },
   type:{
       type:String,

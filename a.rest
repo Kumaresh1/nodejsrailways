@@ -9,36 +9,38 @@ Content-Type: application/json
 
 ###
 
-GET  http://localhost:3000/api/userModel/6
+GET  https://hotels-com-provider.p.rapidapi.com/v1/hotels/booking-details
+###
+//https://railwaytesting.herokuapp.com
 ###
 
 POST http://localhost:3000/api/find/save
 Content-Type: application/json
 
 {
-    "from":"Delhi",
-    "to":"Mumbai",
-    "name":"Jammu Express",
-    "start":"21:20",
-    "end":"01:00",
+    "from":"x2",
+    "to":"yy2",
 
-    "date":"25/05/2021",
+    "name":"Jhh Express",
+    "ArrivalTime":"21:20",
+    "DestinationTime":"02:05",
+    "TotalTime":22,
+    "Fare":1300,
+    
+
+    "date":"26/05/2021",
     "seats":20,
 
     "type":"General"
 }
 
 ###
-POST http://localhost:3000/api/find/search
+POST https://railwaytesting.herokuapp.com/api/find/search
 Content-Type: application/json
 
 {
-    "from":"Jammu",
-    "to":"Gujarat",
-   
-    "date":"25/05/2021",
-   
-    "type":"General"
+    
+  "type":"General"
 }
 ###
 POST http://localhost:3000/api/find/book
