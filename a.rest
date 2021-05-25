@@ -14,32 +14,46 @@ GET  https://hotels-com-provider.p.rapidapi.com/v1/hotels/booking-details
 //https://railwaytesting.herokuapp.com
 ###
 
-POST http://localhost:3000/api/find/save
+POST http://localhost:3000/flights/save
 Content-Type: application/json
 
 {
-    "from":"x2",
-    "to":"yy2",
+    "from":"Delhi",
+    "to":"Australia",
 
-    "name":"Jhh Express",
-    "ArrivalTime":"21:20",
+    "Name":"Australia carrier",
+    "AirlinesName":"Jet Airways",
+    "DepartureTime":"21:20",
     "DestinationTime":"02:05",
     "TotalTime":22,
-    "Fare":1300,
-    
-
-    "date":"26/05/2021",
+    "Fare":1500,
     "seats":20,
 
-    "type":"General"
+    "date":"26/05/2021",
+    
+
+    "type":"first class"
 }
 
+###
+POST http://localhost:3000/flights/book
+Content-Type: application/json
+
+{
+    "from":"Delhi",
+    "to":"Australia",
+
+    "date":"26/05/2021",
+    
+
+    "type":"first class"
+}
 ###
 POST https://railwaytesting.herokuapp.com/api/find/search
 Content-Type: application/json
 
 {
-  
+   "date":"26/05/2021"
 }
 ###
 POST https://railwaytesting.herokuapp.com/api/find/book
@@ -54,3 +68,82 @@ Content-Type: application/json
     "type":"General"
 
 }
+
+###
+
+
+GET  http://localhost:3000/hotel/allhotels
+
+
+
+###
+POST http://localhost:3000/hotel/search
+Content-Type: application/json
+
+{
+
+"Name":"Dubai Palace"
+
+}
+
+###
+
+POST http://localhost:3000/hotel/new
+Content-Type: application/json
+
+{
+"Hno":3,
+"Name":"Good Hotel",
+"Location":"Mumbai",
+"Cost":4000,
+"Totalrooms":{
+
+    "Double":5,
+    "Single":7,
+    "Non-AC":3
+
+},
+"Availablerooms":{
+"Double":5,
+    "Single":7,
+    "Non-AC":3
+},
+"Tags":["Free Parking",
+"Swimming Pool ","Bonfire"]
+,
+"Bookingdetails":{
+
+}
+
+}
+
+###
+POST http://localhost:3000/hotel/book
+Content-Type: application/json
+
+{
+
+"Hno":2,
+"Name":"Dubai Palace",
+"Location":"Mumbai",
+"Cost":3000,
+
+"Details":{
+"Single":1
+    
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

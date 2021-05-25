@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const findtrains = require('../DB/findtrain');
+const findtrains = require('../DB/flightdb');
 const route = express.Router();
 
 route.post('/search', async (req, res) => {
@@ -16,25 +16,25 @@ console.log(req.body);
 
 route.post('/save', async (req, res) => {
 
+let data={};
+    data.from=req.body.from;
+    data.to=req.body.to;
+    data.Name=req.body.Name;
+    data.AirlinesName=req.body.AirlinesName;
+    data.DepartureTime=req.body.DepartureTime;
+    data.DestinationTime=req.body.DestinationTime;
+    data.TotalTime=req.body.TotalTime;
+    data.Fare=req.body.Fare;
+    data.seats=req.body.seats;
+    data.date=req.body.date;
+    data.type=req.body.type;
 
-    const { from, to,name,start,end,totaltime,fare,date,seats,type } = req.body;
-    let data = {};
-    data.from=from;
-    data.to=to;
-    data.TrainName=name;
-    data.ArrivalTime=start;
-    data.DestinationTime=end;
-    data.TotalTime=totaltime;
-    data.Fare=fare;
-    data.seats=seats;
-    data.date=date;
-    data.type=type;
   
-  console.log("req : \t"+data);
+  console.log(data);
     let ft = new findtrains(data);
     await ft.save();
     
-    res.json("Saved success for "+data.TrainName);  
+    res.json("Saved success for "+data.Name);  
     
   });
 
@@ -62,7 +62,7 @@ route.post('/book', async (req, res) => {
       console.log("1 seat updated");
       
     });
-    res.json("Updated Seats ! Remaining : "+available-1);
+    res.json("Updated Seats ! ");
   }
 });
 
@@ -72,7 +72,7 @@ route.get('/fetchall', async (req, res) => {
   
 console.log(req.params);
 
-  let out=await findtrains.find(data);
+  let out=await findtrains.find();
  // console.log(data);
   res.json(out);  
   

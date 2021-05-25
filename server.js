@@ -10,6 +10,10 @@ app.set('view engine','ejs')
 app.use('/api/userModel', require('./Api/User'));
 
 app.use('/api/find', require('./Api/trains'));
+app.use('/flights', require('./Api/flights'));
+app.use('/hotel', require('./Api/hotels'));
+
+
 app.get('/',(req,res)=>
 {
     res.render('index')
