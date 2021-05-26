@@ -137,6 +137,68 @@ Content-Type: application/json
 }
 
 
+###
+POST http://localhost:3000/bus/search
+Content-Type: application/json
+
+{
+
+"from":"Haryana",
+"to":"Bangalore",
+"BusName":"Bangalore express",
+"ArrivalTime":"08:00",
+"DestinationTime":"16:00",
+"seats":50,
+"Fare":1600
+
+}
+
+
+###
+POST http://localhost:3000/bus/save
+Content-Type: application/json
+
+{
+
+"from":"Haryana",
+"to":"Bangalore",
+"BusName":"Bangalore express",
+"ArrivalTime":"08:00",
+"DestinationTime":"16:00",
+"seats":50,
+"Fare":1600,
+"TotalTimeinhr":8,
+"IntermediateStops":["stop1","stop2"],
+"date":"26/05/2021",
+"type":"Semi-Sleeper"
+
+}
+
+
+###
+GET http://localhost:3000/bus/fetchall
+
+
+###
+POST http://localhost:3000/bus/book
+Content-Type: application/json
+
+{
+"from":"Haryana",
+"to":"Bangalore",
+"BusName":"Bangalore express",
+"ArrivalTime":"08:00",
+"DestinationTime":"16:00",
+"seats":50,
+"Fare":1600,
+"date":"26/05/2021",
+"type":"Semi-Sleeper"
+
+}
+
+
+
+
 
 
 

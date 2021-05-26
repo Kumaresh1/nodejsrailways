@@ -1,8 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const findtrains = require('../DB/findtrain');
+const findtrains = require('../DB/busdb');
 const route = express.Router();
-
 
 route.post('/search', async (req, res) => {
   let data = req.body;
@@ -22,31 +21,31 @@ route.post('/save', async (req, res) => {
     let data = {};
     data.from=req.body.from;
     data.to=req.body.to;
-    data.TrainName=req.body.TrainName;
+    data.BusName=req.body.BusName;
     data.ArrivalTime=req.body.ArrivalTime;
     data.DestinationTime=req.body.DestinationTime;
-    data.TotalTimehr=req.body.TotalTimehr;
+    data.TotalTime=req.body.TotalTime;
     data.Fare=req.body.Fare;
     data.seats=req.body.seats;
     data.date=req.body.date;
     data.type=req.body.type;
-  
-  console.log(data);
+  data.IntermediateStops=req.body.IntermediateStops;
+  console.log("req : \t"+data);
     let ft = new findtrains(data);
     await ft.save();
     
-    res.json("Saved success for "+data.TrainName);  
+    res.json("Saved success for "+data.BusName);  
     
   });
 
 
 route.post('/book', async (req, res) => {
-    const { from, to,date,type } = req.body;
+   
     let data = {};
-    data.from=from;
-    data.to=to;
-    data.date=date;
-    data.type=type;
+    data.from=req.body.from;
+    data.to=req.body.to;
+    data.date=req.body.date;
+    data.type=req.body.type;
     let out=await findtrains.find(data);
 
   console.log("Available : "+out[0].seats);

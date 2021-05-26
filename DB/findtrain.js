@@ -23,7 +23,7 @@ const data = new mongoose.Schema({
     type: Number
   },
   
-  TotalTime: {
+  TotalTimehr: {
     type: Number
   },
   

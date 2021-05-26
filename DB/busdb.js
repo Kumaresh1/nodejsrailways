@@ -1,19 +1,16 @@
 const mongoose = require('mongoose');
 
-const fdata = new mongoose.Schema({
+const bdata = new mongoose.Schema({
   from: {
     type: String
   },
   to: {
     type: String
   },
-  Name: {
+  BusName: {
     type: String
   },
-  AirlinesName: {
-    type: String
-  },
-  DepartureTime: {
+  ArrivalTime: {
     type: String
   },
   DestinationTime: {
@@ -26,8 +23,11 @@ const fdata = new mongoose.Schema({
     type: Number
   },
   
-  TotalTimehr: {
+  TotalTimeinhr: {
     type: Number
+  },
+  IntermediateStops:{
+    type:Array
   },
   
  date:{
@@ -36,8 +36,8 @@ const fdata = new mongoose.Schema({
   },
   type:{
       type:String,
-      default:"Second class"
+      default:"general"
   }
 });
 
-module.exports = User = mongoose.model('flight', fdata);
+module.exports = User = mongoose.model('Bus', bdata);

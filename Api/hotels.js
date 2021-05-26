@@ -92,7 +92,7 @@ console.log(checkroom);
 
                 var myquery = bookdata;
                 // Availablerooms:checkroom,Bookingdetails:{j:checkroom[j]}}
-                var newvalues = { $set: {Availablerooms:checkroom,Bookingdetails:{type:j,count:checkroom[j]}}};
+                var newvalues = { $set: {Availablerooms:checkroom,Bookingdetails:{type:j,count:checkroom[j]+1}}};
                 await hotelsdata.updateOne(myquery, newvalues, function(err, res) {
                   if (err) throw err;
                   console.log("\n\tRoom updated");
