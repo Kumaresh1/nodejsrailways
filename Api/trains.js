@@ -19,16 +19,16 @@ route.post('/save', async (req, res) => {
 
     const { from, to,name,start,end,totaltime,fare,date,seats,type } = req.body;
     let data = {};
-    data.from=from;
-    data.to=to;
-    data.TrainName=name;
-    data.ArrivalTime=start;
-    data.DestinationTime=end;
-    data.TotalTime=totaltime;
-    data.Fare=fare;
-    data.seats=seats;
-    data.date=date;
-    data.type=type;
+    data.from=req.body.from;
+    data.to=req.body.to;
+    data.TrainName=req.body.TrainName;
+    data.ArrivalTime=req.body.ArrivalTime;
+    data.DestinationTime=req.body.DestinationTime;
+    data.TotalTime=req.body.TotalTime;
+    data.Fare=req.body.Fare;
+    data.seats=req.body.seats;
+    data.date=req.body.date;
+    data.type=req.body.type;
   
   console.log("req : \t"+data);
     let ft = new findtrains(data);
