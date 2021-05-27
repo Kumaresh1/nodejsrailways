@@ -13,7 +13,7 @@ app.use('/api/find', require('./Api/trains'));
 app.use('/flights', require('./Api/flights'));
 app.use('/hotel', require('./Api/hotels'));
 app.use('/bus', require('./Api/bus'));
-//app.use('/travel', require('./Api/travel'));
+app.use('/travel', require('./Api/travel'));
 
 app.get('/',(req,res)=>
 {

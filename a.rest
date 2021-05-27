@@ -197,10 +197,70 @@ Content-Type: application/json
 }
 
 
+###
+POST http://localhost:3000/travel/newtravel
+Content-Type: application/json
+
+{
+"Pno":2,
+"PackageName":"GOA Tour",
+"Location":"GOA",
+"Cost":25000,
+"Description":{
+
+"Day1":"Beaches",
+"Day2":"Party",
+"Day3":"Beach and show"
 
 
+},
+"TotalDays":3,
+"Tags":["Boating","Touring","Goa"],
+"Bookingdetails":{},
+"BookCount":0
+
+}
+###
+GET http://localhost:3000/travel/alltravel
+###
+POST http://localhost:3000/travel/search
+Content-Type: application/json
+
+{
+"Pno":1,
+"PackageName":"Boat Tour",
+"Location":"Maldives",
+"Cost":15000
+
+}
+###
+
+POST http://localhost:3000/travel/book
+Content-Type: application/json
+
+{
+"Pno":2,
+"PackageName":"GOA Tour",
+"Location":"GOA",
+"Cost":25000,
+"Bookingdetails":{
 
 
+    "No of persons":2,
+    "Person1":{
+        "Name":"Kumaresh",
+        "Age":22
+    },
+     "Person2":{
+        "Name":"Saresh",
+        "Age":25
+    },
+    "StartDate":"26/05/2021",
+    "EndDate":"29/05/2021"
+}
+
+}
+###
 
 
 
