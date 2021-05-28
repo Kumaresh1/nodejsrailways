@@ -10,7 +10,12 @@ console.log(req.body);
 
   let out=await findtrains.find(data);
  // console.log(data);
-  res.json(out);  
+  res.json(
+    
+    {"data":out,
+    "message":"Fetched all datas"
+    }
+    );  
   
 });
 
@@ -34,7 +39,14 @@ route.post('/save', async (req, res) => {
     let ft = new findtrains(data);
     await ft.save();
     
-    res.json("Saved success for "+data.BusName);  
+    res.json(
+      {
+        "data":data,
+      "message":"Saved success for "+data.BusName
+    
+
+      }
+    );  
     
   });
 
@@ -62,7 +74,14 @@ route.post('/book', async (req, res) => {
       console.log("1 seat updated");
       
     });
-    res.json("Updated Seats !");
+    res.json(
+      
+      {
+        "data":data,
+      "messsage":"Updated Seats !"
+      
+      }
+      );
   }
 });
 
@@ -76,7 +95,6 @@ console.log(req.params);
  // console.log(data);
   res.json(out);  
   
-  res.json("ok ok");
 });
 
 

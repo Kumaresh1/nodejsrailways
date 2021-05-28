@@ -6,7 +6,7 @@ const route = express.Router();
 route.post('/search', async (req, res) => {
   let data = req.body;
   
-console.log(req.body);
+//console.log(req.body);
 
   let out=await findtrains.find(data);
  // console.log(data);
@@ -30,12 +30,18 @@ let data={};
     data.type=req.body.type;
 
   
-  console.log(data);
+  //console.log(data);
     let ft = new findtrains(data);
     await ft.save();
     
-    res.json("Saved success for "+data.Name);  
-    
+    res.json(
+      
+      {
+      message:"Saved success for "+data.Name,
+    "data":data  
+    }
+      );  
+      
   });
 
 

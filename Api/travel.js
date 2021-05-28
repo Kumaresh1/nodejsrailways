@@ -28,7 +28,12 @@ data:info
   console.log(req.body);
   
     let out=await travelsdata.find(data);
-    res.json(out);  
+    res.json(
+      {
+        
+      "data":out
+      
+      });  
     
   });
 
@@ -83,7 +88,12 @@ alreadybooked[count_booking+1+""]=bookingreq;
 
   //  console.log(out);
 
-  res.json("Booked successfully"); 
+  res.json(
+    {
+     "message" :"Booked successfully",
+     "data":bookdata
+    }
+  ); 
 
   });
 
