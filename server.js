@@ -15,6 +15,8 @@ app.use('/hotel', require('./Api/hotels'));
 app.use('/bus', require('./Api/bus'));
 app.use('/travel', require('./Api/travel'));
 
+app.use('/user', require('./Api/login'));
+
 app.get('/',(req,res)=>
 {
     res.render('index')
