@@ -14,9 +14,10 @@ route.post('/newtravel', async (req, res) => {
   await ft.save();
   
   res.json(
-    {message:"Travel Save success  "+info.PackageName);  
+    {
+      message:"Travel Save success  "+info.PackageName,;  
 data:info
-  }
+  
 
     
   });
