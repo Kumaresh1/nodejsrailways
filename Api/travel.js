@@ -70,14 +70,24 @@ let alreadybooked={};
 alreadybooked[count_booking+1+""]=bookingreq;
 
    console.log("--------------------");
-   console.log(alreadybooked)
+   
  
    var myquery = bookdata;
+
+
+   let full={};
+
+   full[req.body.id]={"data":bookdata,
+   "details":bookingreq
+  };
+
+
    // Availablerooms:checkroom,Bookingdetails:{j:checkroom[j]}}
    var newvalues = { $set: {
-       Bookingdetails:alreadybooked,
+       
        BookCount:count_booking+1
-    }
+    },
+    $addToSet: {Bookingdetails:full }
     
     };
    await travelsdata.updateOne(myquery, newvalues, function(err, res) {
@@ -106,6 +116,67 @@ alreadybooked[count_booking+1+""]=bookingreq;
     let out=await travelsdata.find();
     res.json(out);  
  
+  });
+ 
+  route.post('/bookingforuser', async (req, res) => {
+  
+  
+    let id=req.body.id;
+    let k=0;
+    console.log(req.body.id);
+  
+    let out=await travelsdata.find();
+   
+  console.log(out[1].Bookingdetails.length)
+  
+  let bd=[];
+  let len=0;
+  for (let j=0;j<out.length;j++){
+     len=out[j].Bookingdetails.length;
+  
+        for(let i=0;i<len;i++){
+  console.log("yes",out[j].Bookingdetails[i][id]);
+  
+  
+        if(out[j].Bookingdetails[i][id]!=undefined )
+          { 
+            console.log("iffff")
+            bd[k]=out[j].Bookingdetails[i][id];
+            k+=1;
+          }
+        }
+  
+  }
+  console.log(out[0].Bookingdetails.length);
+  
+  if(bd.length==0){
+    let response={};
+    response.data={
+      "id":id,
+      "details":bd
+      
+    };
+    response.message={
+      "status":true,
+      "code":"404",
+      "message":"Not Found"
+    }
+      res.json(response);  
+    
+  }
+  else{
+  let response={};
+  response.data={
+    "id":id,
+    "details":bd
+  };
+  response.message={
+    "status":true,
+    "code":"200",
+    "message":"Fetch Successfull"
+  }
+    res.json(response);  
+  }  
   });
   
 

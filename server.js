@@ -4,6 +4,7 @@ const app = express();
 
 connectDB();
 app.use(express.json({ extended: false }));
+//app.use(express.urlencoded({extended:false}));
 app.set('view engine','ejs')
 
 

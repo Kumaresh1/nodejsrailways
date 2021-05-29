@@ -37,7 +37,10 @@ const fdata = new mongoose.Schema({
   type:{
       type:String,
       default:"Second class"
-  }
+  },
+  Bookingdetails:{
+    type:Array
+   }
 });
 
 module.exports = User = mongoose.model('flight', fdata);

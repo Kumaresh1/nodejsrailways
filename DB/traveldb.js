@@ -32,7 +32,7 @@ const tdata = new mongoose.Schema({
  
       
       Bookingdetails: {
-        type: Object
+        type: Array
       },
       BookCount:{
           type:Number

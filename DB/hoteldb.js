@@ -32,7 +32,7 @@ const hdata = new mongoose.Schema({
  
       
       Bookingdetails: {
-        type: Object
+        type: Array
       }
 
 

@@ -37,7 +37,11 @@ const bdata = new mongoose.Schema({
   type:{
       type:String,
       default:"general"
-  }
+  },
+Bookingdetails:{
+ type:Array
+}
+
 });
 
 module.exports = User = mongoose.model('Bus', bdata);

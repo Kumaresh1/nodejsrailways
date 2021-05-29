@@ -39,15 +39,17 @@ Content-Type: application/json
 POST http://localhost:3000/flights/book
 Content-Type: application/json
 
-{
-    "from":"Delhi",
-    "to":"Australia",
-
-    "date":"26/05/2021",
-    
-
+{"from": "USA",
+    "to": "Australia",
+    "date": "29/05/2021",
+"id":"10022",
     "type":"first class"
 }
+###
+
+GET http://localhost:3000/flights/fetchall
+
+
 ###
 POST https://railwaytesting.herokuapp.com/api/find/search
 Content-Type: application/json
@@ -131,7 +133,8 @@ Content-Type: application/json
 "Details":{
 "Single":1
     
-}
+},
+"id":"1111"
 
 
 }
@@ -155,45 +158,46 @@ Content-Type: application/json
 
 
 ###
-POST http://localhost:3000/bus/save
-Content-Type: application/json
-
-{
-
-"from":"Haryana",
-"to":"Bangalore",
-"BusName":"Bangalore express",
-"ArrivalTime":"08:00",
-"DestinationTime":"16:00",
-"seats":50,
-"Fare":1600,
-"TotalTimeinhr":8,
-"IntermediateStops":["stop1","stop2"],
-"date":"26/05/2021",
-"type":"Semi-Sleeper"
-
-}
-
-
-###
-GET http://localhost:3000/bus/fetchall
-
-
-###
 POST http://localhost:3000/bus/book
 Content-Type: application/json
 
 {
-"from":"Haryana",
-"to":"Bangalore",
-"BusName":"Bangalore express",
+
+"from":"loc1",
+"to":"loc2",
+"BusName":"loc express",
 "ArrivalTime":"08:00",
 "DestinationTime":"16:00",
 "seats":50,
-"Fare":1600,
+"Fare":1700,
+"TotalTimeinhr":8,
+"IntermediateStops":["stop1","stop2"],
 "date":"26/05/2021",
-"type":"Semi-Sleeper"
+"type":"Semi-Sleeper",
+"id":"6385"
+}
 
+
+###
+GET http://localhost:3000/api/find/fetchall
+
+
+###
+POST http://localhost:3000/api/find/book
+Content-Type: application/json
+
+{ "type": "Sleeper",
+    "Bookingdetails": [],
+    "id": "60ae",
+    "from": "Chennai",
+    "to": "Mumbai",
+    "TrainName": "Mumbai Express",
+    "ArrivalTime": "22:20",
+    "DestinationTime": "12:00",
+    "TotalTime": 8,
+    "Fare": 800,
+    "seats": 196,
+    "date": "24/05/2021"
 }
 
 
@@ -223,15 +227,11 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/travel/alltravel
 ###
-POST http://localhost:3000/travel/search
+POST http://localhost:3000/travel/bookingforuser
 Content-Type: application/json
 
 {
-"Pno":1,
-"PackageName":"Boat Tour",
-"Location":"Maldives",
-"Cost":15000
-
+"id":"60af6b9226d9893621a7a78d"
 }
 ###
 
@@ -240,19 +240,20 @@ Content-Type: application/json
 
 {
 "Pno":2,
+"id":"60af6b9226d9893621a7a78d",
 "PackageName":"GOA Tour",
 "Location":"GOA",
 "Cost":25000,
 "Bookingdetails":{
 
 
-    "No of persons":2,
+    "No of persons":5,
     "Person1":{
-        "Name":"Kumaresh",
+        "Name":"user1",
         "Age":22
     },
      "Person2":{
-        "Name":"Saresh",
+        "Name":"user2",
         "Age":25
     },
     "StartDate":"26/05/2021",
@@ -267,21 +268,21 @@ POST http://localhost:3000/user/signup
 Content-Type: application/json
 
 {
-"Username":"user2",
+"Username":"user5",
 "Password":"password",
-"Email":"user@email.com"
+"Email":"user5@email.com"
 
 
 }
 
 ###
 
-POST http://localhost:3000/user/login
+POST https://railwaytesting.herokuapp.com/user/login
 Content-Type: application/json
 
 {
 "Username":"Kumaresh",
-"Password":"passwordw"
+"Password":"password"
 
 }
 
@@ -361,4 +362,13 @@ POST https://railwaytesting.herokuapp.com/travel/newtravel
 
 }
 
+###
 
+POST http://localhost:3000/travel/bookingforuser
+Content-Type: application/json
+
+{
+    
+"id":"60af6b9226d9893621a7a78d"
+
+}

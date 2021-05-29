@@ -46,7 +46,7 @@ insdata.Name=datareq.Name;
 insdata.Location=datareq.Location;
 insdata.Cost=datareq.Cost;
 
-insdata.Bookingdetails=datareq.details;
+insdata.details=datareq.Details;
 let bookingreq =datareq.Details;
 
   console.log(bookdata);
@@ -91,8 +91,14 @@ console.log(checkroom);
                 
 
                 var myquery = bookdata;
+
+
+                let full={};
+
+                full[req.body.id]=insdata;
+
                 // Availablerooms:checkroom,Bookingdetails:{j:checkroom[j]}}
-                var newvalues = { $set: {Availablerooms:checkroom,Bookingdetails:{type:j,count:checkroom[j]+1}}};
+                var newvalues = { $set: {Availablerooms:checkroom},$addToSet: {Bookingdetails:full } };
                 await hotelsdata.updateOne(myquery, newvalues, function(err, res) {
                   if (err) throw err;
                   console.log("\n\tRoom updated");
@@ -107,7 +113,15 @@ console.log(checkroom);
 
   //  console.log(out);
     
-   res.json("Booked successfully"); 
+   res.json(
+    {
+      "data":insdata, 
+    message:"Booked successfully",
+    "status":true,
+    "code":200
+    
+    }
+    ); 
 }
   });
 
@@ -123,4 +137,80 @@ console.log(checkroom);
   });
   
 
+  route.get('/allbookings', async (req, res) => {
+  
+    let data = req.params;
+    
+  console.log(req.params);
+  
+    let out=await findtrains.find();
+  
+  
+  
+   // console.log(data);
+    res.json(out[0].Bookingdetails);  
+    
+  });
+  
+  route.post('/bookingforuser', async (req, res) => {
+  
+  
+    let id=req.body.id;
+    let k=0;
+    console.log(req.body.id);
+  
+    let out=await hotelsdata.find();
+   
+  console.log(out[1].Bookingdetails.length)
+  
+  let bd=[];
+  let len=0;
+  for (let j=0;j<out.length;j++){
+     len=out[j].Bookingdetails.length;
+  
+        for(let i=0;i<len;i++){
+  console.log("yes",out[j].Bookingdetails[i][id]);
+  
+  
+        if(out[j].Bookingdetails[i][id]!=undefined )
+          { 
+            console.log("iffff")
+            bd[k]=out[j].Bookingdetails[i][id];
+            k+=1;
+          }
+        }
+  
+  }
+  console.log(out[0].Bookingdetails.length);
+  
+  if(bd.length==0){
+    let response={};
+    response.data={
+      "id":id,
+      "details":bd
+      
+    };
+    response.message={
+      "status":true,
+      "code":"404",
+      "message":"Not Found"
+    }
+      res.json(response);  
+    
+  }
+  else{
+  let response={};
+  response.data={
+    "id":id,
+    "details":bd
+  };
+  response.message={
+    "status":true,
+    "code":"200",
+    "message":"Fetch Successfull"
+  }
+    res.json(response);  
+  }  
+  });
+  
 module.exports = route;

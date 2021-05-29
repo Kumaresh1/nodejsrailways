@@ -6,9 +6,9 @@ const route = express.Router();
 
 route.post('/login', async (req, res) => {
   let data = {};
-  
-let uname=req.body.Username;
-let password=req.body.Password;
+  let ph=req.query;
+let uname=ph.Username;
+let password=ph.Password;
 
 data.Username=uname;
 
@@ -73,9 +73,11 @@ route.post('/signup', async (req, res) => {
 
 
     let data = {};
-    data.Username=req.body.Username;
-    data.Email=req.body.Email;
-    data.Password=req.body.Password;
+    let ph=req.query;
+    console.log(ph);
+    data.Username=ph.Username;
+    data.Email=ph.Email;
+    data.Password=ph.Password;
 
     let out=await findtrains.find({Username:data.Username});
     let out1=await findtrains.find({Email:data.Email});
@@ -163,8 +165,8 @@ route.post('/signup', async (req, res) => {
   
   
     
-  
-    let out=await findtrains.find(req.body);
+  let ph=req.query;
+    let out=await findtrains.find(ph);
     res.json(
         {
         "data":out,
