@@ -87,9 +87,10 @@ console.log(out);
       res.status("404").json(
       
         {
-          "data":data,
-        "messsage":"Not Found",
-        "code":404
+          "Data":data,
+        "Messsage":"Not Found",
+        "Code":404,
+        "Status":true
         
         }
         );
@@ -101,7 +102,13 @@ console.log(out);
 
   let available=out[0].seats;
   if(available==0){
-    res.json("Sorry, Seats are full !");
+    res.json({
+      "Data":data,
+     "Message": "Seats are full",
+     "Status":true,
+     "Code":500
+     
+    });
   }
   else{
   var myquery = data;
@@ -120,7 +127,13 @@ console.log(out);
       console.log("1 seat updated");
       
     });
-    res.json("Updated Seats !");
+    res.json({
+      "Data":data,
+     "Message": "Seats Updated",
+     "Status":true,
+     "Code":200
+     
+    });
   }
 
     }
@@ -134,26 +147,32 @@ console.log(req.params);
 
   let out=await findtrains.find(data);
  // console.log(data);
-  res.json(out);  
+  res.json({
+    "Data":out,
+     "Message": "Fetched all data",
+     "Status":true,
+     "Code":200
+     
+  });  
   
-  res.json("ok ok");
+ 
 });
 
 
-route.get('/allbookings', async (req, res) => {
+// route.get('/allbookings', async (req, res) => {
   
-  let data = req.params;
+//   let data = req.params;
   
-console.log(req.params);
+// console.log(req.params);
 
-  let out=await findtrains.find();
+//   let out=await findtrains.find();
 
 
 
- // console.log(data);
-  res.json(out[0].Bookingdetails);  
+//  // console.log(data);
+//   res.json(out[0].Bookingdetails);  
   
-});
+// });
 
 route.post('/bookingforuser', async (req, res) => {
   
@@ -188,29 +207,29 @@ console.log(out[0].Bookingdetails.length);
 
 if(bd.length==0){
   let response={};
-  response.data={
+  response.Data={
     "id":id,
     "details":bd
     
   };
   response.message={
-    "status":true,
-    "code":"404",
-    "message":"Not Found"
+    "Status":true,
+    "Code":404,
+    "Message":"Not Found"
   }
     res.json(response);  
   
 }
 else{
 let response={};
-response.data={
+response.Data={
   "id":id,
   "details":bd
 };
 response.message={
-  "status":true,
-  "code":"200",
-  "message":"Fetch Successfull"
+  "Status":true,
+  "Code":"200",
+  "Message":"Fetch Successfull"
 }
   res.json(response);  
 }  

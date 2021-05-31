@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const hotelsdata = require('../DB/hoteldb');
+const imgdata = require('../DB/imgdb');
+
 const route = express.Router();
 
 var fs = require('fs');
@@ -27,7 +29,8 @@ var upload = multer({ storage: storage });
 
 
 route.get('/', (req, res) => {
-  hotelsdata.find({}, (err, items) => {
+
+  imgdata.find({}, (err, items) => {
       if (err) {
           console.log(err);
           res.status(500).send('An error occurred', err);
@@ -38,10 +41,59 @@ route.get('/', (req, res) => {
   });
 });
 
+route.get('/getimg', (req, res) => {
+  
+let response={};
+
+let searchobj={
+  name:req.query.name+""
+};
+
+let count=0;
+console.log(searchobj)
+  imgdata.find(searchobj, (err, items) => {
+      if (err) {
+          console.log(err);
+          res.status(500).send('An error occurred', err);
+      }
+
+
+      else {
+
+
+
+        items.forEach(function(image) {
+response.Data={
+  data:image.img.data.toString('base64'),
+Name:image.name,
+Decription:image.desc
+}
+
+response.Status=true;
+response.Code=200;
+
+        });
+
+if(Object.keys(response).length==0){
+  res.json({
+    Message:"Not Found",
+    Data:searchobj,
+    "Status":true,
+    "Code":200
+  });
+}
+else{
+  console.log(response.length)
+res.json(response);
+       } }
+  });
+
+});
+
+
+
 route.post('/postimg', upload.single('image'), (req, res, next) => {
  
-  console.log("Name",req.file.filename);
-  console.log(__dirname);
   var obj = {
       name: req.body.name,
       desc: req.body.desc,
@@ -50,18 +102,24 @@ route.post('/postimg', upload.single('image'), (req, res, next) => {
            contentType: 'image/png'
        }
   }
-  hotelsdata.create(obj, (err, item) => {
+  imgdata.create(obj, (err, item) => {
       if (err) {
           console.log(err);
       }
       else {
            item.save();
-           res.json(img.data);
-          res.redirect('/');
+         
       }
   });
 
-  res.json("yess");
+  res.json({
+    "Data":obj,
+    "Message": "Image Saved success  "+req.body.name,
+    "Status":true,
+    "Code":200
+   
+
+  });
 });
 
 route.post('/postdata', async (req, res) => {

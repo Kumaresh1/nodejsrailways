@@ -7,38 +7,39 @@
 	<title>Image Uploading</title>
 </head>
 
-<body>
-	<h1>To Upload Image on mongoDB</h1>
+<body style="text-align: center;">
+	<h1>Upload</h1>
 	<hr>
 	<div>
 		<form action="hotel/postimg" method="POST" enctype="multipart/form-data">
 			<div>
-				<label for="name">Image Title</label>
+				<label for="name">Name</label><br>
 				<input type="text" id="name" placeholder="Name"
 					value="" name="name" required>
 			</div>
-			<div>
-				<label for="desc">Image Description</label>
-				<textarea id="desc" name="pesc" value="" rows="2"
+			<div><br>
+				<label for="desc"> Description</label><br>
+				<textarea id="desc" name="desc" value="" rows="2"
 						placeholder="Description" required>
 				</textarea>
 			</div>
-			<div>
-				<label for="image">Upload Image</label>
+			<div><br><br>
+				<label for="image">Upload Image</label><br><br>
 				<input type="file" id="image"
 					name="image" value="" required>
 			</div>
-			<div>
-				<button type="submit">Submit</button>
+			<div><br>
+                <br>
+				<button type="submit" style="padding: 5px;">Submit</button>
 			</div>
 		</form>
 	</div>
 
 	<hr>
 
-	<h1>Uploaded Images</h1>
-<!--
-
+	
+<!---->
+<h1>Uploaded Images</h1>
 	
     <div>
         <% items.forEach(function(image) { %>
@@ -58,7 +59,7 @@
         </div>
         <% }) %>
     </div>
--->
+
 
 
 </body>

@@ -15,9 +15,11 @@ route.post('/newtravel', async (req, res) => {
   
   res.json(
     {
-      message:"Travel Save success  "+info.PackageName, 
-data:info
-  
+      Message:"Travel Save success  "+info.PackageName, 
+Data:info,
+"Status":true,
+"Code":200
+
     });
     
   });
@@ -28,13 +30,31 @@ data:info
   console.log(req.body);
   
     let out=await travelsdata.find(data);
-    res.json(
-      {
-        
-      "data":out
-      
-      });  
+
+    if(out.length==0){
+
+  res.json(
     
+    {"Data":out,
+    "Message":"Not found",
+    "Status":true,
+    "Code":404
+    }
+    );  
+  
+
+ }else{
+  res.json(
+    
+    {"Data":out,
+    "Message":"Search datas",
+    "Status":true,
+    "Code":200
+    }
+    );  
+  
+
+  }
   });
 
 
@@ -100,8 +120,10 @@ alreadybooked[count_booking+1+""]=bookingreq;
 
   res.json(
     {
-     "message" :"Booked successfully",
-     "data":bookdata
+     "Message" :"Booked successfully",
+     "Data":bookdata,
+     "Status":true,
+     "Code":200
     }
   ); 
 
@@ -114,7 +136,12 @@ alreadybooked[count_booking+1+""]=bookingreq;
     
   
     let out=await travelsdata.find();
-    res.json(out);  
+    res.json({
+      "Message" :"Fetched all data successfully",
+      "Data":out,
+      "Status":true,
+      "Code":200
+     });  
  
   });
  
@@ -151,29 +178,29 @@ alreadybooked[count_booking+1+""]=bookingreq;
   
   if(bd.length==0){
     let response={};
-    response.data={
+    response.Data={
       "id":id,
       "details":bd
       
     };
-    response.message={
-      "status":true,
-      "code":"404",
-      "message":"Not Found"
+    response.Message={
+      "Status":true,
+      "Code":404,
+      "Message":"Not Found"
     }
       res.json(response);  
     
   }
   else{
   let response={};
-  response.data={
+  response.Data={
     "id":id,
     "details":bd
   };
   response.message={
-    "status":true,
-    "code":"200",
-    "message":"Fetch Successfull"
+    "Status":true,
+    "Code":200,
+    "Message":"Fetch Successfull"
   }
     res.json(response);  
   }  
