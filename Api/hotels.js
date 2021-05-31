@@ -3,21 +3,93 @@ const mongoose = require('mongoose');
 const hotelsdata = require('../DB/hoteldb');
 const route = express.Router();
 
+var fs = require('fs');
+var path = require('path');
+
+var multer = require('multer');
+
+
+var storage = multer.diskStorage({
+
+
+	destination: (req, file, cb) => {
+
+    cb(null, 'Api/uploads')
+	},
+	filename: (req, file, cb) => {
+		cb(null, file.fieldname + '-' + 1);
+    console.log("SAVEDD");
+	}
+});
+
+var upload = multer({ storage: storage });
+
+
+
+route.get('/', (req, res) => {
+  hotelsdata.find({}, (err, items) => {
+      if (err) {
+          console.log(err);
+          res.status(500).send('An error occurred', err);
+      }
+      else {
+          res.render('ok', { items: items });
+      }
+  });
+});
+
+route.post('/postimg', upload.single('image'), (req, res, next) => {
+ 
+  console.log("Name",req.file.filename);
+  console.log(__dirname);
+  var obj = {
+      name: req.body.name,
+      desc: req.body.desc,
+       img: {
+           data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+           contentType: 'image/png'
+       }
+  }
+  hotelsdata.create(obj, (err, item) => {
+      if (err) {
+          console.log(err);
+      }
+      else {
+           item.save();
+           res.json(img.data);
+          res.redirect('/');
+      }
+  });
+
+  res.json("yess");
+});
+
+route.post('/postdata', async (req, res) => {
+
+console.log(req);
+res.json("ppp");
+
+});
+
 route.post('/new', async (req, res) => {
     let info = req.body;
     
-  console.log(info);
+ // console.log(info);
   
 
 
   let ft = new hotelsdata(info);
   await ft.save();
   
-  res.json("Hotel Saved success  "+info.Name);  
-
-
-
-    
+  res.json(
+    {
+    "Data":info,
+   "Message": "Hotel Saved success  "+info.Name,
+   "Status":true,
+   "Code":200
+  
+  });  
+  
   });
 
   route.post('/search', async (req, res) => {
@@ -26,12 +98,37 @@ route.post('/new', async (req, res) => {
   console.log(req.body);
   
     let out=await hotelsdata.find(data);
-    res.json(out);  
     
+    if(out.length==0){
+
+      res.json(
+        
+        {"Data":out,
+        "Message":"Not found",
+        "Status":true,
+        "Code":404
+        }
+        );  
+      
+    
+     }else{
+      res.json(
+        
+        {"Data":out,
+        "Message":"Search datas",
+        "Status":true,
+        "Code":200
+        }
+        );  
+      
+    
+      }
+    
+
+
   });
 
-
-  route.post('/book', async (req, res) => {
+route.post('/book', async (req, res) => {
    
     let datareq = req.body;
   let bookdata={};
@@ -49,7 +146,7 @@ insdata.Cost=datareq.Cost;
 insdata.details=datareq.Details;
 let bookingreq =datareq.Details;
 
-  console.log(bookdata);
+  
 var rtype,rc;  
   for (var i in bookingreq)
   {
@@ -61,16 +158,21 @@ var rtype,rc;
 
     let out=await hotelsdata.find(bookdata);
     
-console.log("outtt : >>>>");
-   console.log(out);
 
    if(out.length==0){
-    res.json("not found");   
+    res.json(
+        
+      {"Data":out,
+      "Message":"Not found ! Booking failed",
+      "Status":true,
+      "Code":404
+      }
+      );  
    }
 
    else{
    let checkroom =out[0].Availablerooms;
-console.log(checkroom);
+
     var atype,ac;  
    for (var j in checkroom)
    {
@@ -78,16 +180,19 @@ console.log(checkroom);
             console.log("Found it : "+j);
             if(checkroom[j]==0)
             {
-                res.send("Room full");
+                res.json(
+        
+                  {"Data":out[0],
+                  "Message":"Room full",
+                  "Status":true,
+                  "Code":200
+                  }
+                  );
             
             }
             else{
                 //book update booking details and minus room
-                console.log("else part");
-                console.log(out[0].Availablerooms[j]);
                 checkroom[j]=checkroom[j]-1;
-                console.log("checkroom");
-                console.log(checkroom);
                 
 
                 var myquery = bookdata;
@@ -115,10 +220,10 @@ console.log(checkroom);
     
    res.json(
     {
-      "data":insdata, 
-    message:"Booked successfully",
-    "status":true,
-    "code":200
+      "Data":insdata, 
+    Message:"Booked successfully",
+    "Status":true,
+    "Code":200
     
     }
     ); 
@@ -132,25 +237,31 @@ console.log(checkroom);
     
   
     let out=await hotelsdata.find();
-    res.json(out);  
+    res.json({
+      "Data":out,
+      "Message":"Fetched all Hotels",
+      "Status":true,
+      "Code":200
+      
+    });  
  
   });
   
 
-  route.get('/allbookings', async (req, res) => {
+  // route.get('/allbookings', async (req, res) => {
   
-    let data = req.params;
+  //   let data = req.params;
     
-  console.log(req.params);
+  // console.log(req.params);
   
-    let out=await findtrains.find();
+  //   let out=await findtrains.find();
   
   
   
-   // console.log(data);
-    res.json(out[0].Bookingdetails);  
+  //  // console.log(data);
+  //   res.json(out[0].Bookingdetails);  
     
-  });
+  // });
   
   route.post('/bookingforuser', async (req, res) => {
   
@@ -185,30 +296,27 @@ console.log(checkroom);
   
   if(bd.length==0){
     let response={};
-    response.data={
+    response.Data={
       "id":id,
       "details":bd
       
     };
-    response.message={
-      "status":true,
-      "code":"404",
-      "message":"Not Found"
-    }
+    response.Status=true,
+    response.Message="Not Found";
+    response.Code=404;
+   
       res.json(response);  
     
   }
   else{
   let response={};
-  response.data={
+  response.Data={
     "id":id,
     "details":bd
   };
-  response.message={
-    "status":true,
-    "code":"200",
-    "message":"Fetch Successfull"
-  }
+  response.Status=true,
+  response.Message="Found data";
+  response.Code=200;
     res.json(response);  
   }  
   });

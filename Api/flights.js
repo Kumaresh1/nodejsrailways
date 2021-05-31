@@ -10,7 +10,30 @@ route.post('/search', async (req, res) => {
 
   let out=await findtrains.find(data);
  // console.log(data);
-  res.json(out);  
+ if(out.length==0){
+
+  res.json(
+    
+    {"Data":out,
+    "Message":"Not found",
+    "Status":true,
+    "Code":404
+    }
+    );  
+  
+
+ }else{
+  res.json(
+    
+    {"Data":out,
+    "Message":"Search datas",
+    "Status":true,
+    "Code":200
+    }
+    );  
+  
+
+  }
   
 });
 
@@ -37,8 +60,10 @@ let data={};
     res.json(
       
       {
-      message:"Saved success for "+data.Name,
-    "data":data  
+      "Message":"Saved success for "+data.Name,
+    "Data":data,
+    "Status":true,
+    "Code":200  
     }
       );  
       
@@ -74,11 +99,11 @@ route.post('/book', async (req, res) => {
       
     });
     res.json({
-"data":data,
+"Data":data,
 
-"message":"Updated Seats ! ",
-"status":true,
-"code":"200"
+"Message":"Updated Seats ! ",
+"Status":true,
+"Code":200
 
 
     });
@@ -93,27 +118,33 @@ console.log(req.params);
 
   let out=await findtrains.find();
  // console.log(data);
-  res.json(out);  
+  res.json({
+    "Data":out,
+    "Message":"Fetched all data",
+"Status":true,
+"Code":200
+  }
+);  
   
 
 });
 
 
 
-route.get('/allbookings', async (req, res) => {
+// route.get('/allbookings', async (req, res) => {
   
-  let data = req.params;
+//   let data = req.params;
   
-console.log(req.params);
+// console.log(req.params);
 
-  let out=await findtrains.find();
+//   let out=await findtrains.find();
 
 
 
- // console.log(data);
-  res.json(out[0].Bookingdetails);  
+//  // console.log(data);
+//   res.json(out[0].Bookingdetails);  
   
-});
+// });
 
 route.post('/bookingforuser', async (req, res) => {
   
@@ -124,7 +155,7 @@ route.post('/bookingforuser', async (req, res) => {
 
   let out=await findtrains.find();
  
-console.log(out[1].Bookingdetails.length)
+//console.log(out[1].Bookingdetails.length)
 
 let bd=[];
 let len=0;
@@ -132,32 +163,29 @@ for (let j=0;j<out.length;j++){
    len=out[j].Bookingdetails.length;
 
       for(let i=0;i<len;i++){
-console.log("yes",out[j].Bookingdetails[i][id]);
+//console.log("yes",out[j].Bookingdetails[i][id]);
 
 
       if(out[j].Bookingdetails[i][id]!=undefined )
         { 
-          console.log("iffff")
           bd[k]=out[j].Bookingdetails[i][id];
           k+=1;
         }
       }
 
 }
-console.log(out[0].Bookingdetails.length);
 
 if(bd.length==0){
   let response={};
-  response.data={
+  response.Data={
     "id":id,
     "details":bd
     
   };
-  response.message={
-    "status":true,
-    "code":"404",
-    "message":"Not Found"
-  }
+  response.Status=true;
+  response.Code=404;
+  response.Message="Not Found";
+ 
     res.json(response);  
   
 }
@@ -167,11 +195,10 @@ response.data={
   "id":id,
   "details":bd
 };
-response.message={
-  "status":true,
-  "code":"200",
-  "message":"Fetch Successfull"
-}
+response.Status=true;
+response.Code=200;
+response.Message="Booking Success";
+
   res.json(response);  
 }  
 });

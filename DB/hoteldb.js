@@ -33,6 +33,17 @@ const hdata = new mongoose.Schema({
       
       Bookingdetails: {
         type: Array
+      },
+      img:
+      {
+          data: Buffer,
+          contentType: String
+      },
+      name:{
+        type:String
+      },
+      desc:{
+        type:String
       }
 
 

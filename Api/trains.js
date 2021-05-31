@@ -11,7 +11,31 @@ console.log(req.body);
 
   let out=await findtrains.find(data);
  // console.log(data);
-  res.json(out);  
+ if(out.length==0){
+
+  res.json(
+    
+    {"Data":out,
+    "Message":"Not found",
+    "Status":true,
+    "Code":404
+    }
+    );  
+  
+
+ }else{
+  res.json(
+    
+    {"Data":out,
+    "Message":"Search datas",
+    "Status":true,
+    "Code":200
+    }
+    );  
+  
+
+  }
+
   
 });
 
@@ -35,7 +59,15 @@ route.post('/save', async (req, res) => {
     let ft = new findtrains(data);
     await ft.save();
     
-    res.json("Saved success for "+data.TrainName);  
+    res.json(
+      {
+        "Data":data,
+     "Message": "Saved success for "+data.TrainName,
+     "Status":true,
+     "Code":200
+     
+    
+    });  
     
   });
 

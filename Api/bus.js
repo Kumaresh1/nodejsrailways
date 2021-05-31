@@ -10,13 +10,30 @@ console.log(req.body);
 
   let out=await findtrains.find(data);
  // console.log(data);
+ if(out.length==0){
+
   res.json(
     
-    {"data":out,
-    "message":"Fetched all datas"
+    {"Data":out,
+    "Message":"Not found",
+    "Status":true,
+    "Code":404
     }
     );  
   
+
+ }else{
+  res.json(
+    
+    {"Data":out,
+    "Message":"Search datas",
+    "Status":true,
+    "Code":200
+    }
+    );  
+  
+
+  }
 });
 
 route.post('/save', async (req, res) => {
@@ -41,9 +58,10 @@ route.post('/save', async (req, res) => {
     
     res.json(
       {
-        "data":data,
-      "message":"Saved success for "+data.BusName
-    
+        "Data":data,
+      "Message":"Saved success for "+data.BusName,
+      "Status":true,
+      "Code":200    
 
       }
     );  
@@ -64,10 +82,10 @@ route.post('/book', async (req, res) => {
       res.status("404").json(
       
         {
-          "data":data,
-        "messsage":"Not Found",
-        "code":404
-        
+          "Data":data,
+          "Message":"Not Found",
+          "Status":true,
+          "Code":404        
         }
         );
     }
@@ -101,9 +119,10 @@ route.post('/book', async (req, res) => {
     res.json(
       
       {
-        "data":data,
-      "messsage":"Updated Seats !"
-      
+        "Data":data,
+      "Messsage":"Updated Seats !",
+      "Status":true,
+      "Code":200
       }
       );
   }
@@ -119,24 +138,31 @@ console.log(req.params);
 
   let out=await findtrains.find(data);
  // console.log(data);
-  res.json(out);  
+  res.json(
+    
+    {"Data":out,
+    "Message":"Fetched all datas",
+    "Status":true,
+    "Code":200
+    }
+   );  
   
 });
 
-route.get('/allbookings', async (req, res) => {
+// route.get('/allbookings', async (req, res) => {
   
-  let data = req.params;
+//   let data = req.params;
   
-console.log(req.params);
+// console.log(req.params);
 
-  let out=await findtrains.find();
+//   let out=await findtrains.find();
 
 
 
- // console.log(data);
-  res.json(out[0].Bookingdetails);  
+//  // console.log(data);
+//   res.json(out[0].Bookingdetails);  
   
-});
+// });
 
 route.post('/bookingforuser', async (req, res) => {
   
@@ -171,30 +197,30 @@ console.log(out[0].Bookingdetails.length);
 
 if(bd.length==0){
   let response={};
-  response.data={
+  response.Data={
     "id":id,
     "details":bd
     
   };
-  response.message={
-    "status":true,
-    "code":"404",
-    "message":"Not Found"
-  }
+
+  response.Status=true;
+  response.Code=404;
+  response.Message="Not Found";
+ 
     res.json(response);  
   
 }
 else{
 let response={};
-response.data={
-  "id":id,
-  "details":bd
+response.Data={
+  "Id":id,
+  "Details":bd
 };
-response.message={
-  "status":true,
-  "code":"200",
-  "message":"Fetch Successfull"
-}
+
+response.Status=true;
+response.Code=200;
+response.Message="Booking Successfull";
+
   res.json(response);  
 }  
 });

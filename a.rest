@@ -364,11 +364,12 @@ POST https://railwaytesting.herokuapp.com/travel/newtravel
 
 ###
 
-POST http://localhost:3000/travel/bookingforuser
+
+POST https://railwaytesting.herokuapp.com/travel/bookingforuser
 Content-Type: application/json
 
 {
     
-"id":"60af6b9226d9893621a7a78d"
+"id":"6021a7a78d"
 
 }
