@@ -3,47 +3,36 @@ const mongoose = require('mongoose');
 
 const hdata = new mongoose.Schema({
     
-  Hno: {
+  hno: {
     type: Number
   },
   
 
-    Name: {
+    name: {
       type: String
     },
     
-    Location: {
+    location: {
       type: String
     },
-    Cost: {
+    cost: {
         type: Number
       },
       
-      Totalrooms: {
+      totalrooms: {
         type:Object
       },
-      Availablerooms: {
+      availablerooms: {
         type: Object
       },
       
-      Tags: {
+      tags: {
         type: Array
       },
  
       
-      Bookingdetails: {
+      bookingdetails: {
         type: Array
-      },
-      img:
-      {
-          data: Buffer,
-          contentType: String
-      },
-      name:{
-        type:String
-      },
-      desc:{
-        type:String
       }
 
 

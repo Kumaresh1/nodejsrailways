@@ -122,12 +122,12 @@ route.post('/postimg', upload.single('image'), (req, res, next) => {
   });
 });
 
-route.post('/postdata', async (req, res) => {
+// route.post('/postdata', async (req, res) => {
 
-console.log(req);
-res.json("ppp");
+// console.log(req);
+// res.json("ppp");
 
-});
+// });
 
 route.post('/new', async (req, res) => {
     let info = req.body;
@@ -190,19 +190,19 @@ route.post('/book', async (req, res) => {
    
     let datareq = req.body;
   let bookdata={};
-  bookdata.Hno=datareq.Hno;  
-bookdata.Name=datareq.Name;
-bookdata.Location=datareq.Location;
-bookdata.Cost=datareq.Cost;
+  bookdata.hno=datareq.hno;  
+bookdata.name=datareq.name;
+bookdata.location=datareq.location;
+bookdata.cost=datareq.cost;
 
 let insdata={};
-insdata.Hno=datareq.Hno;  
-insdata.Name=datareq.Name;
-insdata.Location=datareq.Location;
-insdata.Cost=datareq.Cost;
+insdata.hno=datareq.hno;  
+insdata.name=datareq.name;
+insdata.location=datareq.location;
+insdata.cost=datareq.cost;
 
-insdata.details=datareq.Details;
-let bookingreq =datareq.Details;
+insdata.details=datareq.details;
+let bookingreq =datareq.details;
 
   
 var rtype,rc;  
@@ -229,7 +229,7 @@ var rtype,rc;
    }
 
    else{
-   let checkroom =out[0].Availablerooms;
+   let checkroom =out[0].availablerooms;
 
     var atype,ac;  
    for (var j in checkroom)
@@ -261,7 +261,7 @@ var rtype,rc;
                 full[req.body.id]=insdata;
 
                 // Availablerooms:checkroom,Bookingdetails:{j:checkroom[j]}}
-                var newvalues = { $set: {Availablerooms:checkroom},$addToSet: {Bookingdetails:full } };
+                var newvalues = { $set: {availablerooms:checkroom},$addToSet: {bookingdetails:full } };
                 await hotelsdata.updateOne(myquery, newvalues, function(err, res) {
                   if (err) throw err;
                   console.log("\n\tRoom updated");
@@ -330,27 +330,27 @@ var rtype,rc;
   
     let out=await hotelsdata.find();
    
-  console.log(out[1].Bookingdetails.length)
+  console.log(out[1].bookingdetails.length)
   
   let bd=[];
   let len=0;
   for (let j=0;j<out.length;j++){
-     len=out[j].Bookingdetails.length;
+     len=out[j].bookingdetails.length;
   
         for(let i=0;i<len;i++){
-  console.log("yes",out[j].Bookingdetails[i][id]);
+  console.log("yes",out[j].bookingdetails[i][id]);
   
   
-        if(out[j].Bookingdetails[i][id]!=undefined )
+        if(out[j].bookingdetails[i][id]!=undefined )
           { 
             console.log("iffff")
-            bd[k]=out[j].Bookingdetails[i][id];
+            bd[k]=out[j].bookingdetails[i][id];
             k+=1;
           }
         }
   
   }
-  console.log(out[0].Bookingdetails.length);
+  console.log(out[0].bookingdetails.length);
   
   if(bd.length==0){
     let response={};
