@@ -198,12 +198,13 @@ bookdata.location=datareq.location;
 bookdata.cost=datareq.cost;
 
 let insdata={};
+insdata.id=datareq.id;
 insdata.hno=datareq.hno;  
 insdata.name=datareq.name;
 insdata.location=datareq.location;
 insdata.cost=datareq.cost;
 
-insdata.details=datareq.details;
+insdata.details=[datareq.details];
 let bookingreq =datareq.details;
 
 
@@ -285,9 +286,10 @@ if(tot_room[t].type==rc){
                 var myquery = bookdata;
 
 
-                let full={};
+                let full=insdata;
 
-                full[datareq.id]=insdata;
+               
+
                 console.log("savetotal.avai ",out[0].totalrooms)
              //   savetotal.available=12;
                 console.log("thiss erooeee  :  ",savetotal)

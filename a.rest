@@ -84,7 +84,9 @@ Content-Type: application/json
 
 {
 
-    "name": "Mumbai Palace"
+    "hno":4,
+ "name":"Chennai Palace"
+
 }
 
 ###
@@ -93,24 +95,22 @@ POST http://localhost:3000/hotel/new
 Content-Type: application/json
 
 {
-"hno":3,
- "name":"Mumbai Palace",
-"location":"Mumbai",
-"cost":8000,
+"hno":1,
+ "name":"Dubai Palace",
+"location":"Dubai",
+"cost":2000,
 
 "totalrooms":[
 {
 
-    "type":"double",
+    "type":"single",
     "available":40,
     "total":40
 
 }
-
 ],
-
-"tags":"Free Parking,Swimming Pool,Bonfire",
-"images":""
+"images":[{"image":""}],
+"tags":"Free Parking,Swimming Pool,Bonfire"
 
 
 }
@@ -121,8 +121,8 @@ Content-Type: application/json
 
 {
 
-"hno":3,
- "name":"Mumbai Palace",
+"hno":4,
+ "name":"Chennai Palace",
 "location":"Mumbai",
 "cost":8000,
 
