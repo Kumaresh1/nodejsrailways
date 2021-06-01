@@ -84,9 +84,7 @@ Content-Type: application/json
 
 {
 
-    "hno":4,
- "name":"Chennai Palace"
-
+    "hno":8
 }
 
 ###
@@ -95,10 +93,10 @@ POST http://localhost:3000/hotel/new
 Content-Type: application/json
 
 {
-"hno":1,
- "name":"Dubai Palace",
+"hno":8,
+ "name":"Test",
 "location":"Dubai",
-"cost":2000,
+"cost":4000,
 
 "totalrooms":[
 {
@@ -107,28 +105,35 @@ Content-Type: application/json
     "available":40,
     "total":40
 
+},
+{
+
+    "type":"double",
+    "available":40,
+    "total":40
+
 }
 ],
-"images":[{"image":""}],
+"images":[{"image":"https://firebasestorage.googleapis.com/v0/b/shopping-app-a6ffe.appspot.com/o/hotels%2Fhotel_five.jpg?alt=media&token=d140114d-089f-4688-a7dd-b1deb9358965"}],
 "tags":"Free Parking,Swimming Pool,Bonfire"
 
 
 }
 
 ###
-POST http://localhost:3000/hotel/book
+POST http://localhost:3000/hotel/update
 Content-Type: application/json
 
 {
 
-"hno":4,
- "name":"Chennai Palace",
-"location":"Mumbai",
-"cost":8000,
+"hno":8,
+ "name":"Test",
+"location":"Dubai",
+"cost":1000,
 
 "details":{
- "type":"double",
-  "quantity":2
+ "type":"single",
+  "quantity":3
     
 },
 "id":"12589577885"
