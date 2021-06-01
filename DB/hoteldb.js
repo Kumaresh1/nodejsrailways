@@ -20,19 +20,20 @@ const hdata = new mongoose.Schema({
       },
       
       totalrooms: {
-        type:Object
+        type:Array
       },
-      availablerooms: {
-        type: Object
-      },
+  
       
       tags: {
-        type: Array
+        type: String
       },
  
       
       bookingdetails: {
         type: Array
+      },
+      images:{
+        type:Array
       }
 
 

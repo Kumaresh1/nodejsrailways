@@ -84,7 +84,7 @@ Content-Type: application/json
 
 {
 
-    "name": "Dubai Palace"
+    "name": "Mumbai Palace"
 }
 
 ###
@@ -93,28 +93,25 @@ POST http://localhost:3000/hotel/new
 Content-Type: application/json
 
 {
-"hno":6,
-"name":"Good Hotel",
+"hno":3,
+ "name":"Mumbai Palace",
 "location":"Mumbai",
-"cost":4000,
-"totalrooms":{
+"cost":8000,
 
-    "double":5,
-    "single":7,
-    "non-ac":3
+"totalrooms":[
+{
 
-},
-"availablerooms":{
-"double":5,
-    "single":7,
-    "non-ac":3
-},
-"tags":["Free Parking",
-"Swimming Pool ","Bonfire"]
-,
-"bookingdetails":{
+    "type":"double",
+    "available":40,
+    "total":40
 
 }
+
+],
+
+"tags":"Free Parking,Swimming Pool,Bonfire",
+"images":""
+
 
 }
 
@@ -124,16 +121,17 @@ Content-Type: application/json
 
 {
 
-"hno":2,
-"name":"Dubai Palace",
+"hno":3,
+ "name":"Mumbai Palace",
 "location":"Mumbai",
-"cost":3000,
+"cost":8000,
 
 "details":{
-"single":1
+ "type":"double",
+  "quantity":2
     
 },
-"id":"1111"
+"id":"12589577885"
 
 
 }
@@ -364,11 +362,11 @@ POST https://railwaytesting.herokuapp.com/travel/newtravel
 ###
 
 
-POST https://localhost:3000/hotel/bookingforuser
+POST http://localhost:3000/hotel/bookingforuser
 Content-Type: application/json
 
 {
     
-"id":"6021a7a78d"
+"id":"1111"
 
 }
