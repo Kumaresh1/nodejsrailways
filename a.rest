@@ -167,9 +167,9 @@ Content-Type: application/json
 
 {
 
-"from":"loc1",
-"to":"loc2",
-"BusName":"loc express",
+"from":"loc3",
+"to":"loc4",
+"BusName":"loc1 express",
 "ArrivalTime":"08:00",
 "DestinationTime":"16:00",
 "seats":50,
@@ -178,7 +178,7 @@ Content-Type: application/json
 "IntermediateStops":["stop1","stop2"],
 "date":"26/05/2021",
 "type":"Semi-Sleeper",
-"id":"6385"
+
 }
 
 

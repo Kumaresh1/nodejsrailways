@@ -4,7 +4,7 @@ const findtrains = require('../DB/flightdb');
 const route = express.Router();
 
 route.post('/search', async (req, res) => {
-  let data = req.body;
+  let data = req.query;
   
 //console.log(req.body);
 
@@ -42,12 +42,12 @@ route.post('/save', async (req, res) => {
 let data={};
     data.from=req.body.from;
     data.to=req.body.to;
-    data.Name=req.body.Name;
-    data.AirlinesName=req.body.AirlinesName;
-    data.DepartureTime=req.body.DepartureTime;
-    data.DestinationTime=req.body.DestinationTime;
-    data.TotalTimehr=req.body.TotalTimehr;
-    data.Fare=req.body.Fare;
+    data.name=req.body.name;
+    data.airlinesName=req.body.airlinesName;
+    data.departuretime=req.body.departuretime;
+    data.destinationtime=req.body.DestinationTime;
+    data.totaltimehr=req.body.totaltimehr;
+    data.fare=req.body.fare;
     data.seats=req.body.seats;
     data.date=req.body.date;
     data.type=req.body.type;
@@ -60,7 +60,7 @@ let data={};
     res.json(
       
       {
-      "message":"Saved success for "+data.Name,
+      "message":"Saved success for "+data.name,
     "data":data,
     "status":true,
     "code":200  
@@ -70,55 +70,87 @@ let data={};
   });
 
 
-route.post('/book', async (req, res) => {
- 
+  route.post('/book', async (req, res) => {
+    const { from, to,date,type } = req.body;
     let data = {};
-    data.from=req.body.from;
-    data.to=req.body.to;
-    data.date=req.body.date;
-    data.type=req.body.type;
+    
+    let datacon=req.query;
+    
+    data.from=datacon.from;
+    data.to=datacon.to;
+    data.date=datacon.date;
+    data.type=datacon.type;
+    
+    var quan_t=datacon.quantity;
+    var type_t=datacon.type;
+
     let out=await findtrains.find(data);
+console.log(out);
+    if(out[0]==undefined || datacon.id==null){
+      res.status("404").json(
+      
+        {
+          "data":data,
+        "messsage":"Not Found",
+        "code":404,
+        "status":true
+        
+        }
+        );
+    }
+    else{
+
 
   console.log("Available : "+out[0].seats);
 
   let available=out[0].seats;
   if(available==0){
-    res.json(
-    {
+    res.json({
       "data":data,
-      
-      "message":"Sorry, Seats are full !",
-      "status":true,
-      "code":500
-      
-      
-          }
-    
-    );
+     "message": "Seats are full",
+     "status":true,
+     "code":500
+     
+    });
   }
   else{
+  var myquery = data;
     let full={};
 
-    full[req.body.id]=data;
-    
+    full.id=datacon.id;
+     full.from=datacon.from;
+    full.to=datacon.to;
+    full.date=datacon.date;
+   
+full.details=[{
+  type:datacon.type,
+  quantity:datacon.quantity
+}];
 
-  var myquery = data;
-    var newvalues = { $set: {seats:available-1 },$addToSet: {Bookingdetails:full } };
+
+ //   full.data=data;
+    
+  
+    var newvalues = { $set: {seats:available-quan_t },$addToSet: {bookingdetails:full } };
+  
+  
+
+
     await findtrains.updateOne(myquery, newvalues, function(err, res) {
       if (err) throw err;
       console.log("1 seat updated");
       
     });
     res.json({
-"data":data,
-
-"message":"Updated Seats ! ",
-"status":true,
-"code":200
-
-
+      "data":full,
+     "message": "Seats Updated",
+     "status":true,
+     "code":200
+     
     });
   }
+
+    }
 });
 
 route.get('/fetchall', async (req, res) => {
@@ -127,91 +159,72 @@ route.get('/fetchall', async (req, res) => {
   
 console.log(req.params);
 
-  let out=await findtrains.find();
+  let out=await findtrains.find(data);
  // console.log(data);
+ 
   res.json({
     "data":out,
-    "message":"Fetched all data",
-"status":true,
-"code":200
-  }
-);  
+     "message": "Fetched all data",
+     "status":true,
+     "code":200
+     
+  });  
   
-
+ 
 });
 
 
 
-// route.get('/allbookings', async (req, res) => {
-  
-//   let data = req.params;
-  
-// console.log(req.params);
-
-//   let out=await findtrains.find();
-
-
-
-//  // console.log(data);
-//   res.json(out[0].Bookingdetails);  
-  
-// });
-
 route.post('/bookingforuser', async (req, res) => {
   
   
-  let id=req.body.id;
+  let id=req.query.id;
   let k=0;
   console.log(req.body.id);
 
   let out=await findtrains.find();
  
-//console.log(out[1].Bookingdetails.length)
+//console.log(out[1].bookingdetails.length)
 
 let bd=[];
 let len=0;
 for (let j=0;j<out.length;j++){
-   len=out[j].Bookingdetails.length;
+  len=out[j].bookingdetails.length;
 
-      for(let i=0;i<len;i++){
-//console.log("yes",out[j].Bookingdetails[i][id]);
+     for(let i=0;i<len;i++){
+// console.log("yes",out[j].bookingdetails[i].id);
 
 
-      if(out[j].Bookingdetails[i][id]!=undefined )
-        { 
-          bd[k]=out[j].Bookingdetails[i][id];
-          k+=1;
-        }
-      }
+     if(out[j].bookingdetails[i].id==id )
+       { 
+         console.log("iffff")
+         bd[k]=out[j].bookingdetails[i];
+         k+=1;
+       }
+     }
 
 }
+console.log(out[0].bookingdetails.length);
 
 if(bd.length==0){
   let response={};
-  response.data={
-    "id":id,
-    "details":bd
-    
-  };
-  response.status=true;
-  response.code=404;
+  response.Data=bd;
+  response.status=true,
   response.message="Not Found";
+  response.code=404;
  
     res.json(response);  
   
 }
 else{
 let response={};
-response.data={
-  "id":id,
-  "details":bd
-};
-response.status=true;
+response.Data=bd;
+response.status=true,
+response.message="Found data";
 response.code=200;
-response.message="Booking Success";
-
   res.json(response);  
 }  
+
 });
 
 

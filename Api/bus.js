@@ -4,7 +4,7 @@ const findtrains = require('../DB/busdb');
 const route = express.Router();
 
 route.post('/search', async (req, res) => {
-  let data = req.body;
+  let data = req.query;
   
 console.log(req.body);
 
@@ -42,7 +42,7 @@ route.post('/save', async (req, res) => {
     const { from, to,name,start,end,totaltime,fare,date,seats,type } = req.body;
     let data = {};
 
-    var datacon=req.body;
+    var datacon=req.query;
     data.from=datacon.from;
     data.to=datacon.to;
     data.busname=datacon.busname;
@@ -54,7 +54,8 @@ route.post('/save', async (req, res) => {
     data.date=datacon.date;
     data.type=datacon.type;
   data.intermediatestops=datacon.intermediatestops;
-  console.log("req : \t"+data);
+  console.log("req : \t",data);
+
     let ft = new findtrains(data);
     await ft.save();
     

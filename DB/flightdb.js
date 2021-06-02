@@ -7,26 +7,27 @@ const fdata = new mongoose.Schema({
   to: {
     type: String
   },
-  Name: {
+  name: {
+    type: String,
+    unique:true
+  },
+  airlinesname: {
     type: String
   },
-  AirlinesName: {
+  departuretime: {
     type: String
   },
-  DepartureTime: {
-    type: String
-  },
-  DestinationTime: {
+  destinationtime: {
     type: String
   },
   seats: {
     type: Number
   },
-  Fare: {
+  fare: {
     type: Number
   },
   
-  TotalTimehr: {
+  totaltimehr: {
     type: Number
   },
   
@@ -38,7 +39,7 @@ const fdata = new mongoose.Schema({
       type:String,
       default:"Second class"
   },
-  Bookingdetails:{
+  bookingdetails:{
     type:Array
    }
 });
