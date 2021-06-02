@@ -7,26 +7,26 @@ const bdata = new mongoose.Schema({
   to: {
     type: String
   },
-  BusName: {
+  busname: {
     type: String
   },
-  ArrivalTime: {
+  arrivaltime: {
     type: String
   },
-  DestinationTime: {
+  destinationtime: {
     type: String
   },
   seats: {
     type: Number
   },
-  Fare: {
+  fare: {
     type: Number
   },
   
-  TotalTimeinhr: {
+  totaltimeinhr: {
     type: Number
   },
-  IntermediateStops:{
+  intermediatestops:{
     type:Array
   },
   
@@ -38,7 +38,7 @@ const bdata = new mongoose.Schema({
       type:String,
       default:"general"
   },
-Bookingdetails:{
+bookingdetails:{
  type:Array
 }
 
