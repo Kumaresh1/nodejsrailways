@@ -438,11 +438,7 @@ await hotelsdata.updateOne(
   
   if(bd.length==0){
     let response={};
-    response.Data={
-      "id":id,
-      "details":bd
-      
-    };
+    response.Data=bd;
     response.status=true,
     response.message="Not Found";
     response.code=404;
