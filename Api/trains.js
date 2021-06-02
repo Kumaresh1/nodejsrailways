@@ -210,11 +210,7 @@ console.log(out[0].bookingdetails.length);
 
 if(bd.length==0){
   let response={};
-  response.Data={
-    "id":id,
-    "details":bd
-    
-  };
+  response.Data=bd;
   response.status=true,
   response.message="Not Found";
   response.code=404;
@@ -224,10 +220,7 @@ if(bd.length==0){
 }
 else{
 let response={};
-response.Data={
-  "id":id,
-  "details":bd
-};
+response.Data=bd;
 response.status=true,
 response.message="Found data";
 response.code=200;

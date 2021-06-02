@@ -428,7 +428,7 @@ await hotelsdata.updateOne(
         if(out[j].bookingdetails[i].id==id )
           { 
             console.log("iffff")
-            bd[k]=out[j].bookingdetails[i].details;
+            bd[k]=out[j].bookingdetails[i];
             k+=1;
           }
         }
@@ -448,7 +448,7 @@ await hotelsdata.updateOne(
   }
   else{
   let response={};
-  response.Data=bd
+  response.Data=bd;
   
   response.status=true,
   response.message="Found data";

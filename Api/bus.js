@@ -236,10 +236,7 @@ if(bd.length==0){
 }
 else{
 let response={};
-response.Data={
-  "id":id,
-  "details":bd
-};
+response.Data=bd;
 response.status=true,
 response.message="Found data";
 response.code=200;
