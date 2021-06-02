@@ -428,7 +428,7 @@ await hotelsdata.updateOne(
         if(out[j].bookingdetails[i].id==id )
           { 
             console.log("iffff")
-            bd[k]=out[j].bookingdetails[i];
+            bd[k]=out[j].bookingdetails[i].details;
             k+=1;
           }
         }
@@ -453,6 +453,8 @@ await hotelsdata.updateOne(
   response.status=true,
   response.message="Found data";
   response.code=200;
+
+  console.log(response);
     res.json(response);  
   }  
   });
