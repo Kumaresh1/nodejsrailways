@@ -130,7 +130,7 @@ var multer = require('multer');
 // });
 
 route.post('/new', async (req, res) => {
-    let info = req.body;
+    let info = req.query;
     
  // console.log(info);
   
@@ -152,7 +152,7 @@ route.post('/new', async (req, res) => {
 
 
 
-  route.post('/search', async (req, res) => {
+route.post('/search', async (req, res) => {
     let data = req.body;
     
   console.log(req.body);
@@ -328,7 +328,7 @@ route.post('/new', async (req, res) => {
   route.post('/book',async(req,res)=>{
 
 
-    let datareq = req.body;
+    let datareq = req.query;
 
   
   let insdata={};
@@ -360,10 +360,27 @@ await hotelsdata.updateOne(
   }
 
 ).then(result=>{
-  res.json(result);
+      res.json(
+     {
+       "data":insdata, 
+     message:"Booked successfully",
+     "status":true,
+     "code":200
+    
+     }
+     );
 })
 .catch(err=>{
-  res.json(err);
+  res.json(
+    {
+      "data":insdata, 
+    message:"Error Booking ! "+err,
+    "status":false,
+    "code":500
+   
+    }
+    );  
+
 })
 
   });

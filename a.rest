@@ -140,13 +140,8 @@ Content-Type: application/json
 
 
 }
-
-POST http://localhost:3000/hotel/bookingforuser
-Content-Type: application/json
-
-{
-"id":""
-}
+###
+POST http://localhost:3000/hotel/bookingforuser?id=12589577885
 
 
 ###

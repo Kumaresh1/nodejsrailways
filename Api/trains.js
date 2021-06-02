@@ -15,10 +15,10 @@ console.log(req.body);
 
   res.json(
     
-    {"Data":out,
-    "Message":"Not found",
-    "Status":true,
-    "Code":404
+    {"data":out,
+    "message":"Not found",
+    "status":true,
+    "code":404
     }
     );  
   
@@ -26,10 +26,10 @@ console.log(req.body);
  }else{
   res.json(
     
-    {"Data":out,
-    "Message":"Search datas",
-    "Status":true,
-    "Code":200
+    {"data":out,
+    "message":"Search datas",
+    "status":true,
+    "code":200
     }
     );  
   
@@ -61,10 +61,10 @@ route.post('/save', async (req, res) => {
     
     res.json(
       {
-        "Data":data,
-     "Message": "Saved success for "+data.TrainName,
-     "Status":true,
-     "Code":200
+        "data":data,
+     "message": "Saved success for "+data.TrainName,
+     "status":true,
+     "code":200
      
     
     });  
@@ -76,21 +76,25 @@ route.post('/book', async (req, res) => {
     const { from, to,date,type } = req.body;
     let data = {};
     
-    data.from=req.body.from;
-    data.to=req.body.to;
-    data.date=req.body.date;
-    data.type=req.body.type;
+    let datacon=req.body;
+    data.from=datacon.from;
+    data.to=datacon.to;
+    data.date=datacon.date;
+    data.type=datacon.type;
+    
+    var quan_t=datacon.details.quantity;
+    var type_t=datacon.details.type;
 
     let out=await findtrains.find(data);
 console.log(out);
     if(out[0]==undefined){
-      res.status("404").json(
+      res.code("404").json(
       
         {
-          "Data":data,
-        "Messsage":"Not Found",
-        "Code":404,
-        "Status":true
+          "data":data,
+        "messsage":"Not Found",
+        "code":404,
+        "status":true
         
         }
         );
@@ -103,10 +107,10 @@ console.log(out);
   let available=out[0].seats;
   if(available==0){
     res.json({
-      "Data":data,
-     "Message": "Seats are full",
-     "Status":true,
-     "Code":500
+      "data":data,
+     "message": "Seats are full",
+     "status":true,
+     "code":500
      
     });
   }
@@ -114,10 +118,18 @@ console.log(out);
   var myquery = data;
     let full={};
 
-    full[req.body.id]=data;
+    full.id=datacon.id;
+    full.from=datacon.from;
+    full.to=datacon.to;
+    full.date=datacon.date;
+    full.type=datacon.type;
+full.details=datacon.details;
+
+
+    full.data=data;
     
   
-    var newvalues = { $set: {seats:available-1 },$addToSet: {Bookingdetails:full } };
+    var newvalues = { $set: {seats:available-quan_t },$addToSet: {Bookingdetails:full } };
   
   
 
@@ -128,10 +140,10 @@ console.log(out);
       
     });
     res.json({
-      "Data":data,
-     "Message": "Seats Updated",
-     "Status":true,
-     "Code":200
+      "data":full,
+     "message": "Seats Updated",
+     "status":true,
+     "code":200
      
     });
   }
@@ -147,11 +159,12 @@ console.log(req.params);
 
   let out=await findtrains.find(data);
  // console.log(data);
+ 
   res.json({
-    "Data":out,
-     "Message": "Fetched all data",
-     "Status":true,
-     "Code":200
+    "data":out,
+     "message": "Fetched all data",
+     "status":true,
+     "code":200
      
   });  
   
@@ -159,25 +172,11 @@ console.log(req.params);
 });
 
 
-// route.get('/allbookings', async (req, res) => {
-  
-//   let data = req.params;
-  
-// console.log(req.params);
-
-//   let out=await findtrains.find();
-
-
-
-//  // console.log(data);
-//   res.json(out[0].Bookingdetails);  
-  
-// });
 
 route.post('/bookingforuser', async (req, res) => {
   
   
-  let id=req.body.id;
+  let id=req.query.id;
   let k=0;
   console.log(req.body.id);
 
@@ -188,19 +187,19 @@ console.log(out[1].Bookingdetails.length)
 let bd=[];
 let len=0;
 for (let j=0;j<out.length;j++){
-   len=out[j].Bookingdetails.length;
+  len=out[j].bookingdetails.length;
 
-      for(let i=0;i<len;i++){
-console.log("yes",out[j].Bookingdetails[i][id]);
+     for(let i=0;i<len;i++){
+// console.log("yes",out[j].bookingdetails[i].id);
 
 
-      if(out[j].Bookingdetails[i][id]!=undefined )
-        { 
-          console.log("iffff")
-          bd[k]=out[j].Bookingdetails[i][id];
-          k+=1;
-        }
-      }
+     if(out[j].bookingdetails[i].id==id )
+       { 
+         console.log("iffff")
+         bd[k]=out[j].bookingdetails[i];
+         k+=1;
+       }
+     }
 
 }
 console.log(out[0].Bookingdetails.length);
@@ -212,11 +211,10 @@ if(bd.length==0){
     "details":bd
     
   };
-  response.message={
-    "Status":true,
-    "Code":404,
-    "Message":"Not Found"
-  }
+  response.status=true,
+  response.message="Not Found";
+  response.code=404;
+ 
     res.json(response);  
   
 }
@@ -226,13 +224,12 @@ response.Data={
   "id":id,
   "details":bd
 };
-response.message={
-  "Status":true,
-  "Code":"200",
-  "Message":"Fetch Successfull"
-}
+response.status=true,
+response.message="Found data";
+response.code=200;
   res.json(response);  
 }  
+
 });
 
 
