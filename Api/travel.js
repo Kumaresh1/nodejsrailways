@@ -15,10 +15,10 @@ route.post('/newtravel', async (req, res) => {
   
   res.json(
     {
-      Message:"Travel Save success  "+info.PackageName, 
-Data:info,
-"Status":true,
-"Code":200
+      message:"Travel Save success  "+info.PackageName, 
+data:info,
+"status":true,
+"code":200
 
     });
     
@@ -35,10 +35,10 @@ Data:info,
 
   res.json(
     
-    {"Data":out,
-    "Message":"Not found",
-    "Status":true,
-    "Code":404
+    {"data":out,
+    "message":"Not found",
+    "status":true,
+    "code":404
     }
     );  
   
@@ -46,10 +46,10 @@ Data:info,
  }else{
   res.json(
     
-    {"Data":out,
-    "Message":"Search datas",
-    "Status":true,
-    "Code":200
+    {"data":out,
+    "message":"Search datas",
+    "status":true,
+    "code":200
     }
     );  
   
@@ -97,7 +97,7 @@ alreadybooked[count_booking+1+""]=bookingreq;
 
    let full={};
 
-   full[req.body.id]={"data":bookdata,
+   full[datareq.id]={"data":bookdata,
    "details":bookingreq
   };
 
@@ -120,10 +120,10 @@ alreadybooked[count_booking+1+""]=bookingreq;
 
   res.json(
     {
-     "Message" :"Booked successfully",
-     "Data":bookdata,
-     "Status":true,
-     "Code":200
+     "message" :"Booked successfully",
+     "data":bookdata,
+     "status":true,
+     "code":200
     }
   ); 
 
@@ -137,10 +137,10 @@ alreadybooked[count_booking+1+""]=bookingreq;
   
     let out=await travelsdata.find();
     res.json({
-      "Message" :"Fetched all data successfully",
-      "Data":out,
-      "Status":true,
-      "Code":200
+      "message" :"Fetched all data successfully",
+      "data":out,
+      "status":true,
+      "code":200
      });  
  
   });
@@ -183,11 +183,10 @@ alreadybooked[count_booking+1+""]=bookingreq;
       "details":bd
       
     };
-    response.Message={
-      "Status":true,
-      "Code":404,
-      "Message":"Not Found"
-    }
+    response.status=true,
+    response.message="Not Found";
+    response.code=404;
+   
       res.json(response);  
     
   }
@@ -197,13 +196,13 @@ alreadybooked[count_booking+1+""]=bookingreq;
     "id":id,
     "details":bd
   };
-  response.message={
-    "Status":true,
-    "Code":200,
-    "Message":"Fetch Successfull"
-  }
+  response.status=true,
+  response.message="Found data";
+  response.code=200;
     res.json(response);  
   }  
+  
+
   });
   
 

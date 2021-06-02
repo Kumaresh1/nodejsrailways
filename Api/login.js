@@ -22,10 +22,10 @@ let out=await findtrains.find(data);
  
 
   if(out.length==0){
-    response.Data=data;
-    response.Code=404;
-    response.Status=true;
-    response.Message="Login Failed ! User not found";
+    response.data=data;
+    response.code=404;
+    response.status=true;
+    response.message="Login Failed ! User not found";
     res.status("404").json(response);
     
 
@@ -35,37 +35,37 @@ else{
     if(data.Username =="" || data.Password =="" ){
 
         res.json({
-            "Data":data,
+            "data":data,
     
-        "Status": true,
+        "status": true,
     
-        "Code": 400,
-            "Message":"Invalid Credentials"
+        "code": 400,
+            "message":"Invalid Credentials"
         })
     }
     else if(data.Username ==undefined || data.Password ==undefined ){
-    res.json({"Data":data,
-    "Message":"Some Fields are Missing",
-  "Status":true,
-"Code":400})
+    res.json({"data":data,
+    "message":"Some Fields are Missing",
+  "status":true,
+"code":400})
    
 }
     
 
 else    if(out[0].Password==password){
 
-        response.Data=out[0];
-        response.Code=200;
-        response.Status=true;
-        response.Message="Login Successful";
+        response.data=out[0];
+        response.code=200;
+        response.status=true;
+        response.message="Login Successful";
         
           res.json(response);
     }  
     else{
-        response.Data=out;
-        response.Code=400;
-        response.Status=true;
-        response.Message="Wrong Password";
+        response.data=out;
+        response.code=400;
+        response.status=true;
+        response.message="Wrong Password";
         
           res.json(response);
         
@@ -89,19 +89,19 @@ route.post('/signup', async (req, res) => {
     let response={};
    
     if(out.length!=0){
-       response.Data=data;
-       response.Code=400;
-       response.Status=false;
-       response.Message="Signup Failed ! Username already taken";
+       response.data=data;
+       response.code=400;
+       response.status=false;
+       response.message="Signup Failed ! Username already taken";
        res.status("400").json(response);
        
    
     }
     else if(out1.length!=0){
-        response.Data=data;
-        response.Code=400;
-        response.Status=false;
-        response.Message="Signup Failed ! Email already taken";
+        response.data=data;
+        response.code=400;
+        response.status=false;
+        response.message="Signup Failed ! Email already taken";
         res.status("400").json(response);
         
     
@@ -111,22 +111,22 @@ route.post('/signup', async (req, res) => {
     if(data.Username =="" || data.Password =="" || data.Email ==""){
 
             res.json({
-                "Data":data,
+                "data":data,
 
-            "Status": true,
+            "status": true,
         
-            "Code": 400,
-                "Message":"Invalid Credentials"
+            "code": 400,
+                "message":"Invalid Credentials"
             })
     }
     else if(data.Username ==undefined || data.Password ==undefined || data.Email ==undefined){
         res.json({
-          "Data":data,
-        "Message":"Some Fields are Missing",
+          "data":data,
+        "message":"Some Fields are Missing",
 
-        "Status": true,
+        "status": true,
         
-        "Code": 400
+        "code": 400
       })
     }
     else{
@@ -138,13 +138,13 @@ route.post('/signup', async (req, res) => {
 
         
 
-            "Data":data ,
+            "data":data ,
         
-            "Status": true,
+            "status": true,
         
-            "Code": 200,
+            "code": 200,
         
-            "Message": "User registration Successful"
+            "message": "User registration Successful"
         
         
     });  
@@ -160,13 +160,13 @@ route.post('/signup', async (req, res) => {
     let out=await findtrains.find();
     res.json(
         {
-        "Data":out,
+        "data":out,
         
-        "Status": true,
+        "status": true,
         
-        "Code": 200,
+        "code": 200,
     
-        "Message":"Successfully fetched all users"
+        "message":"Successfully fetched all users"
         }
         );  
  
@@ -180,13 +180,13 @@ route.post('/signup', async (req, res) => {
     let out=await findtrains.find(ph);
     res.json(
         {
-        "Data":out,
+        "data":out,
         
-        "Status": true,
+        "status": true,
         
-        "Code": 200,
+        "code": 200,
     
-        "Message":"Successfully fetched all users"
+        "message":"Successfully fetched all users"
         }
         );  
  
