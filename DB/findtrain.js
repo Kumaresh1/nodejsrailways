@@ -7,23 +7,23 @@ const data = new mongoose.Schema({
   to: {
     type: String
   },
-  TrainName: {
+  trainname: {
     type: String
   },
-  ArrivalTime: {
+  arrivaltime: {
     type: String
   },
-  DestinationTime: {
+  destinationTime: {
     type: String
   },
   seats: {
     type: Number
   },
-  Fare: {
+  fare: {
     type: Number
   },
   
-  TotalTimehr: {
+  totaltimehr: {
     type: Number
   },
   
@@ -35,7 +35,7 @@ const data = new mongoose.Schema({
       type:String,
       default:"general"
   },
-  Bookingdetails:{
+  bookingdetails:{
     type:Array
    }
 });

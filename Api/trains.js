@@ -44,16 +44,17 @@ route.post('/save', async (req, res) => {
 
     const { from, to,name,start,end,totaltime,fare,date,seats,type } = req.body;
     let data = {};
-    data.from=req.body.from;
-    data.to=req.body.to;
-    data.TrainName=req.body.TrainName;
-    data.ArrivalTime=req.body.ArrivalTime;
-    data.DestinationTime=req.body.DestinationTime;
-    data.TotalTimehr=req.body.TotalTimehr;
-    data.Fare=req.body.Fare;
-    data.seats=req.body.seats;
-    data.date=req.body.date;
-    data.type=req.body.type;
+    let d_con=req.body;
+    data.from=d_con.from;
+    data.to=d_con.to;
+    data.trainname=d_con.trainname;
+    data.arrivaltime=d_con.arrivaltime;
+    data.destinationtime=d_con.destinationtime;
+    data.totaltimehr=d_con.totaltimehr;
+    data.fare=d_con.fare;
+    data.seats=d_con.seats;
+    data.date=d_con.date;
+    data.type=d_con.type;
   
   console.log(data);
     let ft = new findtrains(data);
@@ -62,7 +63,7 @@ route.post('/save', async (req, res) => {
     res.json(
       {
         "data":data,
-     "message": "Saved success for "+data.TrainName,
+     "message": "Saved success for "+data.trainname,
      "status":true,
      "code":200
      
