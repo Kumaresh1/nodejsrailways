@@ -47,7 +47,8 @@ route.post('/save', async (req, res) => {
     let d_con=req.query;
     data.from=d_con.from;
     data.to=d_con.to;
-    data.trainname=d_con.trainname;
+    data.name=d_con.name;
+    data.airlinesname=d_con.airlinesname;
     data.arrivaltime=d_con.arrivaltime;
     data.destinationtime=d_con.destinationtime;
     data.totaltimehr=d_con.totaltimehr;
@@ -63,7 +64,7 @@ route.post('/save', async (req, res) => {
     res.json(
       {
         "data":data,
-     "message": "Saved success for "+data.trainname,
+     "message": "Saved success for "+data.name,
      "status":true,
      "code":200
      

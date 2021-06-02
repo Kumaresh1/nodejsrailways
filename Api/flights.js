@@ -40,17 +40,19 @@ route.post('/search', async (req, res) => {
 route.post('/save', async (req, res) => {
 
 let data={};
-    data.from=req.body.from;
-    data.to=req.body.to;
-    data.name=req.body.name;
-    data.airlinesName=req.body.airlinesName;
-    data.departuretime=req.body.departuretime;
-    data.destinationtime=req.body.DestinationTime;
-    data.totaltimehr=req.body.totaltimehr;
-    data.fare=req.body.fare;
-    data.seats=req.body.seats;
-    data.date=req.body.date;
-    data.type=req.body.type;
+
+let d_con=req.query;
+    data.from=d_con.from;
+    data.to=d_con.to;
+    data.name=d_con.name;
+    data.airlinesName=d_con.airlinesName;
+    data.departuretime=d_con.departuretime;
+    data.destinationtime=d_con.DestinationTime;
+    data.totaltimehr=d_con.totaltimehr;
+    data.fare=d_con.fare;
+    data.seats=d_con.seats;
+    data.date=d_con.date;
+    data.type=d_con.type;
 
   
   //console.log(data);
@@ -71,11 +73,12 @@ let data={};
 
 
   route.post('/book', async (req, res) => {
+    
     const { from, to,date,type } = req.body;
     let data = {};
     
     let datacon=req.query;
-    
+
     data.from=datacon.from;
     data.to=datacon.to;
     data.date=datacon.date;
