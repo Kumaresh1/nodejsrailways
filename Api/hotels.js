@@ -153,7 +153,7 @@ route.post('/new', async (req, res) => {
 
 
 route.post('/search', async (req, res) => {
-    let data = req.body;
+    let data = req.query;
     
   console.log(req.body);
   
