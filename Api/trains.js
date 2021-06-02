@@ -119,15 +119,15 @@ console.log(out);
   var myquery = data;
     let full={};
 
-    full.id=datacon.id;
-    full.from=datacon.from;
+    // full.id=datacon.id;
+     full.from=datacon.from;
     full.to=datacon.to;
     full.date=datacon.date;
    
-full.details={
+full.details=[{
   type:datacon.type,
   quantity:datacon.quantity
-};
+}];
 
 
  //   full.data=data;

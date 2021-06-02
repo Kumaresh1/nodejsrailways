@@ -332,7 +332,7 @@ route.post('/search', async (req, res) => {
 
   
   let insdata={};
-  insdata.id=datareq.id;
+ // insdata.id=datareq.id;
   insdata.hno=datareq.hno;  
   insdata.name=datareq.name;
   insdata.location=datareq.location;
