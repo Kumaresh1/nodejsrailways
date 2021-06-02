@@ -5,7 +5,7 @@ const route = express.Router();
 
 
 route.post('/search', async (req, res) => {
-  let data = req.body;
+  let data = req.query;
   
 console.log(req.body);
 
@@ -44,7 +44,7 @@ route.post('/save', async (req, res) => {
 
     const { from, to,name,start,end,totaltime,fare,date,seats,type } = req.body;
     let data = {};
-    let d_con=req.body;
+    let d_con=req.query;
     data.from=d_con.from;
     data.to=d_con.to;
     data.trainname=d_con.trainname;
@@ -77,19 +77,19 @@ route.post('/book', async (req, res) => {
     const { from, to,date,type } = req.body;
     let data = {};
     
-    let datacon=req.body;
+    let datacon=req.query;
     data.from=datacon.from;
     data.to=datacon.to;
     data.date=datacon.date;
     data.type=datacon.type;
     
-    var quan_t=datacon.details.quantity;
-    var type_t=datacon.details.type;
+    var quan_t=datacon.quantity;
+    var type_t=datacon.type;
 
     let out=await findtrains.find(data);
 console.log(out);
-    if(out[0]==undefined){
-      res.code("404").json(
+    if(out[0]==undefined || datacon.id==null){
+      res.status("404").json(
       
         {
           "data":data,
@@ -123,14 +123,17 @@ console.log(out);
     full.from=datacon.from;
     full.to=datacon.to;
     full.date=datacon.date;
-    full.type=datacon.type;
-full.details=datacon.details;
+   
+full.details={
+  type:datacon.type,
+  quantity:datacon.quantity
+};
 
 
-    full.data=data;
+ //   full.data=data;
     
   
-    var newvalues = { $set: {seats:available-quan_t },$addToSet: {Bookingdetails:full } };
+    var newvalues = { $set: {seats:available-quan_t },$addToSet: {bookingdetails:full } };
   
   
 
@@ -183,7 +186,7 @@ route.post('/bookingforuser', async (req, res) => {
 
   let out=await findtrains.find();
  
-console.log(out[1].Bookingdetails.length)
+//console.log(out[1].bookingdetails.length)
 
 let bd=[];
 let len=0;
@@ -203,7 +206,7 @@ for (let j=0;j<out.length;j++){
      }
 
 }
-console.log(out[0].Bookingdetails.length);
+console.log(out[0].bookingdetails.length);
 
 if(bd.length==0){
   let response={};
