@@ -14,10 +14,10 @@ route.post('/search', async (req, res) => {
 
   res.json(
     
-    {"Data":out,
-    "Message":"Not found",
-    "Status":true,
-    "Code":404
+    {"data":out,
+    "message":"Not found",
+    "status":true,
+    "code":404
     }
     );  
   
@@ -25,10 +25,10 @@ route.post('/search', async (req, res) => {
  }else{
   res.json(
     
-    {"Data":out,
-    "Message":"Search datas",
-    "Status":true,
-    "Code":200
+    {"data":out,
+    "message":"Search datas",
+    "status":true,
+    "code":200
     }
     );  
   
@@ -60,10 +60,10 @@ let data={};
     res.json(
       
       {
-      "Message":"Saved success for "+data.Name,
-    "Data":data,
-    "Status":true,
-    "Code":200  
+      "message":"Saved success for "+data.Name,
+    "data":data,
+    "status":true,
+    "code":200  
     }
       );  
       
@@ -83,7 +83,18 @@ route.post('/book', async (req, res) => {
 
   let available=out[0].seats;
   if(available==0){
-    res.json("Sorry, Seats are full !");
+    res.json(
+    {
+      "data":data,
+      
+      "message":"Sorry, Seats are full !",
+      "status":true,
+      "code":500
+      
+      
+          }
+    
+    );
   }
   else{
     let full={};
@@ -99,11 +110,11 @@ route.post('/book', async (req, res) => {
       
     });
     res.json({
-"Data":data,
+"data":data,
 
-"Message":"Updated Seats ! ",
-"Status":true,
-"Code":200
+"message":"Updated Seats ! ",
+"status":true,
+"code":200
 
 
     });
@@ -119,10 +130,10 @@ console.log(req.params);
   let out=await findtrains.find();
  // console.log(data);
   res.json({
-    "Data":out,
-    "Message":"Fetched all data",
-"Status":true,
-"Code":200
+    "data":out,
+    "message":"Fetched all data",
+"status":true,
+"code":200
   }
 );  
   
@@ -177,14 +188,14 @@ for (let j=0;j<out.length;j++){
 
 if(bd.length==0){
   let response={};
-  response.Data={
+  response.data={
     "id":id,
     "details":bd
     
   };
-  response.Status=true;
-  response.Code=404;
-  response.Message="Not Found";
+  response.status=true;
+  response.code=404;
+  response.message="Not Found";
  
     res.json(response);  
   
@@ -195,9 +206,9 @@ response.data={
   "id":id,
   "details":bd
 };
-response.Status=true;
-response.Code=200;
-response.Message="Booking Success";
+response.status=true;
+response.code=200;
+response.message="Booking Success";
 
   res.json(response);  
 }  

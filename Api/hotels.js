@@ -391,9 +391,9 @@ await hotelsdata.updateOne(
   route.post('/bookingforuser', async (req, res) => {
   
   
-    let id=req.body.id;
+    let id=req.query.id;
     let k=0;
-    console.log(req.body.id);
+    console.log(req.query.id);
   
     let out=await hotelsdata.find();
    
@@ -405,13 +405,13 @@ await hotelsdata.updateOne(
      len=out[j].bookingdetails.length;
   
         for(let i=0;i<len;i++){
-  console.log("yes",out[j].bookingdetails[i][id]);
+ // console.log("yes",out[j].bookingdetails[i].id);
   
   
-        if(out[j].bookingdetails[i][id]!=undefined )
+        if(out[j].bookingdetails[i].id==id )
           { 
             console.log("iffff")
-            bd[k]=out[j].bookingdetails[i][id];
+            bd[k]=out[j].bookingdetails[i];
             k+=1;
           }
         }

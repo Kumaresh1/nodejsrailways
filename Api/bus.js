@@ -14,10 +14,10 @@ console.log(req.body);
 
   res.json(
     
-    {"Data":out,
-    "Message":"Not found",
-    "Status":true,
-    "Code":404
+    {"data":out,
+    "message":"Not found",
+    "status":false,
+    "code":404
     }
     );  
   
@@ -25,10 +25,10 @@ console.log(req.body);
  }else{
   res.json(
     
-    {"Data":out,
-    "Message":"Search datas",
-    "Status":true,
-    "Code":200
+    {"data":out,
+    "message":"Search datas",
+    "status":true,
+    "code":200
     }
     );  
   
@@ -58,10 +58,10 @@ route.post('/save', async (req, res) => {
     
     res.json(
       {
-        "Data":data,
-      "Message":"Saved success for "+data.BusName,
-      "Status":true,
-      "Code":200    
+        "data":data,
+      "message":"Saved success for "+data.BusName,
+      "status":true,
+      "code":200    
 
       }
     );  
@@ -82,10 +82,10 @@ route.post('/book', async (req, res) => {
       res.status("404").json(
       
         {
-          "Data":data,
-          "Message":"Not Found",
-          "Status":true,
-          "Code":404        
+          "data":data,
+          "message":"Not Found",
+          "status":true,
+          "code":404        
         }
         );
     }
@@ -119,10 +119,10 @@ route.post('/book', async (req, res) => {
     res.json(
       
       {
-        "Data":data,
-      "Messsage":"Updated Seats !",
-      "Status":true,
-      "Code":200
+        "data":data,
+      "messsage":"Updated Seats !",
+      "status":true,
+      "code":200
       }
       );
   }
@@ -140,10 +140,10 @@ console.log(req.params);
  // console.log(data);
   res.json(
     
-    {"Data":out,
-    "Message":"Fetched all datas",
-    "Status":true,
-    "Code":200
+    {"data":out,
+    "message":"Fetched all datas",
+    "status":true,
+    "code":200
     }
    );  
   
@@ -197,29 +197,29 @@ console.log(out[0].Bookingdetails.length);
 
 if(bd.length==0){
   let response={};
-  response.Data={
+  response.data={
     "id":id,
     "details":bd
     
   };
 
-  response.Status=true;
-  response.Code=404;
-  response.Message="Not Found";
+  response.status=true;
+  response.code=404;
+  response.message="Not Found";
  
     res.json(response);  
   
 }
 else{
 let response={};
-response.Data={
+response.data={
   "Id":id,
   "Details":bd
 };
 
-response.Status=true;
-response.Code=200;
-response.Message="Booking Successfull";
+response.status=true;
+response.code=200;
+response.message="Booking Successfull";
 
   res.json(response);  
 }  

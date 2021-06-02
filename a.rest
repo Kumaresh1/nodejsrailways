@@ -141,6 +141,13 @@ Content-Type: application/json
 
 }
 
+POST http://localhost:3000/hotel/bookingforuser
+Content-Type: application/json
+
+{
+"id":""
+}
+
 
 ###
 POST http://localhost:3000/bus/search
@@ -229,11 +236,11 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/travel/alltravel
 ###
-POST http://localhost:3000/travel/bookingforuser
+POST http://localhost:3000/hotel/bookingforuser
 Content-Type: application/json
 
 {
-"id":"60af6b9226d9893621a7a78d"
+"id":""
 }
 ###
 
