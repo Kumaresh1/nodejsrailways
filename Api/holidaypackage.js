@@ -100,9 +100,36 @@ bookdata.details=datareq.details;
 
 let bookingreq =datareq.Bookingdetails;
 
-let out=await travelsdata.find({"packages.id":bookdata.id});
+let out=await travelsdata.find({"packages.id":bookdata.id})
+.then(result=>{})
+.catch(err=>{
+  res.json(
+    {
+      "data":bookdata, 
+    message:"Error Booking ! "+err,
+    "status":false,
+    "code":500
+   
+    }
+    );  
 
-console.log(out[0].packages);
+})
+console.log("out",out);
+
+if(out == undefined){
+  res.json(
+    {
+      "data":bookdata, 
+    message:"No data found  ",
+    "status":false,
+    "code":404
+   
+    }
+    );  
+
+}
+else{
+
 let i_data={
   id:bookdata.id,
   user_id:bookdata.user_id,
@@ -151,7 +178,7 @@ await travelsdata.updateOne(
 })
 
 
-
+}
   });
 
 
