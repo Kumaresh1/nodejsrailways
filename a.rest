@@ -492,23 +492,29 @@ GET http://localhost:3000/holiday/allpackages
 GET http://localhost:3000/offer/alloffers
 
 ###
-POST http://localhost:3000/holiday/newholiday
+POST http://localhost:3000/offer/newoffer
 Content-Type: application/json
 
 {
 "image":"https://gos3.ibcdn.com/top-1545054367.jpg",
-
+"title":"summer offer",
+"sub_title":"flat 50% off",
+"code":"1AB23",
+"tnc":"valid till 30/8/2021,only on selected spots,must claim before use",
+"value":"hiii",
+"id":"12ddd",
+"type":"holiday"
 }
 
 
 ###
 
 
-POST http://localhost:3000/holiday/search
+POST http://localhost:3000/offer/search
 Content-Type: application/json
 
 {
-"id":"1ab2444"
+"id":"12ddd"
 }
 
 ###

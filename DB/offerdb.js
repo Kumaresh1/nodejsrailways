@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const offerdata = new mongoose.Schema({
     
   image:{
-    type:Number
+    type:String
   },
   title: {
     type: String
