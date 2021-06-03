@@ -8,7 +8,6 @@ app.use(express.json({ extended: false }));
 //app.use(express.urlencoded({extended:false}));
 app.set('view engine','ejs')
 
-// Step 5 - set up multer for storing uploaded files
 
 
 
@@ -22,6 +21,9 @@ app.use('/bus', require('./Api/bus'));
 app.use('/travel', require('./Api/travel'));
 
 app.use('/user', require('./Api/login'));
+app.use('/holiday', require('./Api/holidaypackage'));
+
+app.use('/offer', require('./Api/offerapi'));
 
 app.get('/',(req,res)=>
 {

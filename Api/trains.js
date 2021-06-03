@@ -5,9 +5,18 @@ const route = express.Router();
 
 
 route.post('/search', async (req, res) => {
+
   let data = req.query;
   
-console.log(req.body);
+  var searchdata={};
+
+  for (var i in data){
+    if(data[i]==""){
+      delete data[i]
+    }
+  }
+
+console.log(data);
 
   let out=await findtrains.find(data);
  // console.log(data);

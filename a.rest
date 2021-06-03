@@ -377,3 +377,152 @@ Content-Type: application/json
 "id":"1111"
 
 }
+
+
+###
+POST http://localhost:3000/holiday/newholiday
+Content-Type: application/json
+
+{
+"location":"india",
+"starting_price":5000,
+"name":"india tour",
+"image":"https://www.bespokeindiaholidays.com/wp-content/uploads/2013/05/North-India-Tours.gif",
+"packages":[
+{
+
+"id":"1ab2444",
+"title":"package 1",
+"price":12000,
+"rating":5,
+"image":"https://ls-intranet.net/wp-content/uploads/2018/04/HOlidays.jpg",
+"location":"Goa",
+"totaldays":4,
+"bookcount":0,
+"tags":[
+    {
+        "title":"tag1"
+    },
+    {
+        "title":"tag2"
+    }
+],
+"description":[
+    {
+        "day":"1",
+        "program":"visite place and check in at hotel"
+    },
+    {
+        "day":"2",
+        "program":"visit place and go to location"
+    }
+
+]
+
+
+
+}
+
+
+]
+}
+
+
+###
+
+
+POST http://localhost:3000/holiday/search
+Content-Type: application/json
+
+{
+"id":"1ab2444"
+}
+
+###
+
+
+POST http://localhost:3000/holiday/book
+Content-Type: application/json
+
+{
+    "package_no":1,
+"id":"1ab2444",
+"title":"package 1",
+"price":12000,
+"location":"Goa",
+
+"details":{
+
+        "No of persons":5,
+    "Person1":{
+        "Name":"user1",
+        "Age":22
+    },
+     "Person2":{
+        "Name":"user2",
+        "Age":25
+    },
+    "StartDate":"26/05/2021",
+    "EndDate":"29/05/2021"
+
+
+}
+}
+
+###
+
+
+POST http://localhost:3000/holiday/bookingforuser
+Content-Type: application/json
+
+{
+    
+"id":"1ab2444"
+
+}
+
+
+###
+
+GET http://localhost:3000/holiday/allpackages
+
+
+###
+
+GET http://localhost:3000/offer/alloffers
+
+###
+POST http://localhost:3000/holiday/newholiday
+Content-Type: application/json
+
+{
+"image":"https://gos3.ibcdn.com/top-1545054367.jpg",
+
+}
+
+
+###
+
+
+POST http://localhost:3000/holiday/search
+Content-Type: application/json
+
+{
+"id":"1ab2444"
+}
+
+###
+
+
+
+
+
+
+
+
+
+
+
+
+
+
