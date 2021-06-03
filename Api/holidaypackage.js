@@ -88,7 +88,7 @@ route.post('/search', async (req, res) => {
    
     let datareq = req.body;
   let bookdata={};
-  bookdata.userid=datareq.userid; 
+  bookdata.user_id=datareq.user_id; 
   bookdata.id=datareq.id;  
   bookdata.package_no=datareq.package_no;
 
@@ -105,11 +105,14 @@ let out=await travelsdata.find({"packages.id":bookdata.id});
 console.log(out[0].packages);
 let i_data={
   id:bookdata.id,
-  userid:bookdata.userid,
+  user_id:bookdata.user_id,
   title:bookdata.title,
   price:bookdata.price,
   location:bookdata.location,
-  details:bookdata.details
+  nb_of_person:datareq.nb_of_person,
+  userinfo:datareq.userinfo,
+  start_date:datareq.start_date,
+  end_date:datareq.end_date
 }
 
 await travelsdata.updateOne(
