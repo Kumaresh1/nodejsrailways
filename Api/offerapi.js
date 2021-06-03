@@ -41,6 +41,12 @@ store.tnc=info.tnc;
 route.post('/search', async (req, res) => {
     let data = req.body;
     
+
+    for (var i in data){
+        if(data[i]==""){
+          delete data[i]
+        }
+      }
   console.log(req.body);
   
     let out=await travelsdata.find(data);

@@ -8,9 +8,15 @@ route.post('/search', async (req, res) => {
   
 //console.log(req.body);
 
-  let out=await findtrains.find(data);
- // console.log(data);
- if(out.length==0){
+for (var i in data){
+  if(data[i]==""){
+    delete data[i]
+  }
+}  
+
+let out=await findtrains.find(data);
+
+if(out.length==0){
 
   res.json(
     

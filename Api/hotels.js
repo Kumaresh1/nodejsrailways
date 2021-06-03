@@ -156,6 +156,12 @@ route.post('/search', async (req, res) => {
     let data = req.query;
     
   console.log(req.body);
+
+  for (var i in data){
+    if(data[i]==""){
+      delete data[i]
+    }
+  }
   
     let out=await hotelsdata.find(data);
     
