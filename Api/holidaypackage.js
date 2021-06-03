@@ -75,7 +75,7 @@ route.post('/search', async (req, res) => {
 
   route.post('/book', async (req, res) => {
    
-    let datareq = req.query;
+    let datareq = req.body;
   let bookdata={};
  
   bookdata.id=datareq.id;  
