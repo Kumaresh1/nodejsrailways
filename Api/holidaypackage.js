@@ -19,8 +19,7 @@ route.post('/newholiday', async (req, res) => {
 
 
   let ft = new travelsdata(info);
-  await ft.save()
-  .then(result=>{
+  await ft.save().then(result=>{
 
     res.json(
       {
@@ -31,11 +30,23 @@ route.post('/newholiday', async (req, res) => {
   
       });
   
+  })
+  .catch(err=>{
+    res.json(
+      {
+        message:err, 
+  data:info,
+  "status":true,
+  "code":200
+  
+      });
+  
+  }
+    )
   });
 
+
   
-    
-  });
 
 route.post('/search', async (req, res) => {
     let data = req.query;
@@ -77,7 +88,7 @@ route.post('/search', async (req, res) => {
    
     let datareq = req.body;
   let bookdata={};
- 
+  bookdata.userid=datareq.userid; 
   bookdata.id=datareq.id;  
   bookdata.package_no=datareq.package_no;
 
@@ -92,28 +103,30 @@ let bookingreq =datareq.Bookingdetails;
 let out=await travelsdata.find({"packages.id":bookdata.id});
 
 console.log(out[0].packages);
+let i_data={
+  id:bookdata.id,
+  userid:bookdata.userid,
+  title:bookdata.title,
+  price:bookdata.price,
+  location:bookdata.location,
+  details:bookdata.details
+}
 
 await travelsdata.updateOne(
 
   {package_no:bookdata.package_no},
   { $inc: { "packages.$[element].bookcount" : 1 },
-  $addToSet:{ bookingdetails :[ {
-    id:bookdata.id,
-    title:bookdata.title,
-    price:bookdata.price,
-    location:bookdata.location,
-    details:bookdata.details
-  }] }
+  $push:{ bookingdetails : i_data  }
 },
   { 
-    arrayFilters: [ { "element.id": { $eq: bookdata.id } } ]
+    arrayFilters: [ { "element.id": { $eq: bookdata.userid } } ]
   }
 
 ).then(result=>{
   console.log(result);
       res.json(
      {
-       "data":bookdata, 
+       "data":i_data, 
      message:"Booked successfully",
      "status":true,
      "code":200
@@ -173,7 +186,7 @@ await travelsdata.updateOne(
  // console.log("yes",out[j].bookingdetails[i].id);
   
   
-        if(out[j].bookingdetails[i].id==id )
+        if(out[j].bookingdetails[i].userid==id )
           { 
             console.log("iffff")
             bd[k]=out[j].bookingdetails[i];

@@ -23,7 +23,8 @@ const offerdata = new mongoose.Schema({
   },
 
     id:{
-        type:String
+        type:String,
+        unique:true
     },
     type:{
         type:String

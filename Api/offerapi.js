@@ -7,7 +7,7 @@ const route = express.Router();
 
 
 route.post('/newoffer', async (req, res) => {
-    let info = req.body;
+    let info = req.query;
     
   console.log(info);
 
@@ -32,14 +32,26 @@ store.tnc=info.tnc;
   
       });
   
-  });
+  })
+  .catch(err=>{
+    res.json(
+      {
+        message:err, 
+  data:info,
+  "status":false,
+  "code":500
+  
+      });
+  
+  }
+    );
 
   
     
   });
 
 route.post('/search', async (req, res) => {
-    let data = req.body;
+    let data = req.query;
     
 
     for (var i in data){
