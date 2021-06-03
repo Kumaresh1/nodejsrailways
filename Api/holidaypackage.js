@@ -7,7 +7,7 @@ const route = express.Router();
 
 
 route.post('/newholiday', async (req, res) => {
-    let info = req.query;
+    let info = req.body;
     
   console.log(info);
 
@@ -38,7 +38,7 @@ route.post('/newholiday', async (req, res) => {
   });
 
 route.post('/search', async (req, res) => {
-    let data = req.query;
+    let data = req.body;
     
   console.log(req.body);
   
@@ -75,7 +75,7 @@ route.post('/search', async (req, res) => {
 
   route.post('/book', async (req, res) => {
    
-    let datareq = req.query;
+    let datareq = req.body;
   let bookdata={};
  
   bookdata.id=datareq.id;  
@@ -158,7 +158,7 @@ await travelsdata.updateOne(
   route.post('/bookingforuser', async (req, res) => {
   
   
-    let id=req.query.id;
+    let id=req.body.id;
     let k=0;
     console.log(req.query.id);
   

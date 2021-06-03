@@ -384,19 +384,19 @@ POST http://localhost:3000/holiday/newholiday
 Content-Type: application/json
 
 {
-"location":"india",
-"starting_price":5000,
-"name":"india tour",
-"image":"https://www.bespokeindiaholidays.com/wp-content/uploads/2013/05/North-India-Tours.gif",
+"location":"Australia",
+"starting_price":25000,
+"name":"Aus tour",
+"image":"https://images.thrillophilia.com/image/upload/s--VanSzoeY--/c_fill,h_775,q_auto,w_1600/f_auto,fl_strip_profile/v1/images/photos/000/173/446/original/1570610472_0.jpg.jpg?1570610472",
 "packages":[
 {
 
-"id":"1ab2444",
+"id":"aus123",
 "title":"package 1",
-"price":12000,
-"rating":5,
+"price":25000,
+"rating":3,
 "image":"https://ls-intranet.net/wp-content/uploads/2018/04/HOlidays.jpg",
-"location":"Goa",
+"location":"Madagascar",
 "totaldays":4,
 "bookcount":0,
 "tags":[
@@ -418,13 +418,7 @@ Content-Type: application/json
     }
 
 ]
-
-
-
-}
-
-
-]
+}]
 }
 
 
