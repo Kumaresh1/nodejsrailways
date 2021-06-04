@@ -8,6 +8,8 @@ route.post('/search', async (req, res) => {
 
   let data = req.query;
   
+
+  
   var searchdata={};
 
   for (var i in data){

@@ -140,7 +140,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/hotel/update
+POST http://localhost:3000/hotel/book
 Content-Type: application/json
 
 {
@@ -155,8 +155,15 @@ Content-Type: application/json
   "quantity":3
     
 },
-"id":"12589577885"
-
+"id":"12589577885",
+"userinfo":[
+    {
+        "name":"mm",
+        "age":22,
+        "email":"xyz@gmail.com",
+        "phone":"123344444"
+    }
+]
 
 }
 ###

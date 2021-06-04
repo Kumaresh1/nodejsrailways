@@ -11,9 +11,9 @@ route.post('/search', async (req, res) => {
 
   data.busname={ '$regex' : regex}
 
-  var regex = new RegExp(data.traveler_name, "i");
+  var regex1 = new RegExp(data.traveler_name, "i");
 
-  data.traveler_name={ '$regex' : regex}
+  data.traveler_name={ '$regex' : regex1}
 
   
 console.log(req.body);
