@@ -497,7 +497,7 @@ Content-Type: application/json
 "sub_title":"flat 50% off",
 "code":"1AB23",
 "tnc":"valid till 30/8/2021,only on selected spots,must claim before use",
-"value":"hiii",
+"value":60,
 "id":"12ddd",
 "type":"holiday"
 }

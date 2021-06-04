@@ -4,8 +4,6 @@ const travelsdata = require('../DB/holidaydb');
 const route = express.Router();
 
 
-
-
 route.post('/newholiday', async (req, res) => {
     let info = req.body;
     
