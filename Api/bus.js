@@ -93,7 +93,7 @@ route.post('/save', async (req, res) => {
    
     let data = {};
     
-    let datacon=req.query;
+    let datacon=req.body;
 
     data.from=datacon.from;
     data.to=datacon.to;

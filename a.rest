@@ -62,12 +62,31 @@ POST https://railwaytesting.herokuapp.com/api/find/book
 Content-Type: application/json
 
 {
- "from":"Jammu",
-    "to":"Gujarat",
-   
-    "date":"25/05/2021",
-   
-    "type":"General"
+
+"from":"x1",
+"to":"x2",
+"date":"24/05/2021",
+"type":"Sleeper",
+"quantity":2,
+"id":"12333",
+
+"userinfo":[
+    {
+"name":"x2",
+"age":22,
+"email":"xxyz@gmail.com",
+"phone":"112333444"
+
+},
+
+    {
+"name":"x3",
+"age":22,
+"email":"xxyz@gmail.com",
+"phone":"112333444"
+
+}]
+
 
 }
 
