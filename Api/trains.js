@@ -89,8 +89,8 @@ route.post('/book', async (req, res) => {
     const { from, to,date,type } = req.body;
     let data = {};
     
-    let datacon=req.body;
-    
+    let datacon=req.query;
+
     data.from=datacon.from;
     data.to=datacon.to;
     data.date=datacon.date;
