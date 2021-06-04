@@ -8,6 +8,7 @@ const route = express.Router();
 
 route.post('/newoffer', async (req, res) => {
     let info = req.query;
+    info.value=Number(info.value);
     
   console.log(info);
 
