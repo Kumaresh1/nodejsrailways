@@ -141,10 +141,10 @@ console.log("req : ",datacon);
     full.to=datacon.to;
     full.date=datacon.date;
    
-full.details={
+full.details=[{
   type:datacon.type,
   quantity:datacon.quantity
-};
+}];
 
 full.userinfo=datacon.userinfo;
 
