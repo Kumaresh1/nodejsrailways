@@ -5,6 +5,16 @@ const route = express.Router();
 
 route.post('/search', async (req, res) => {
   let data = req.query;
+
+
+  var regex = new RegExp(data.busname, "i");
+
+  data.busname={ '$regex' : regex}
+
+  var regex = new RegExp(data.traveler_name, "i");
+
+  data.traveler_name={ '$regex' : regex}
+
   
 console.log(req.body);
 
@@ -48,7 +58,7 @@ route.post('/save', async (req, res) => {
     const { from, to,name,start,end,totaltime,fare,date,seats,type } = req.body;
     let data = {};
 
-    var datacon=req.query;
+    var datacon=req.body;
     data.from=datacon.from;
     data.to=datacon.to;
     data.busname=datacon.busname;
@@ -59,6 +69,7 @@ route.post('/save', async (req, res) => {
     data.seats=datacon.seats;
     data.date=datacon.date;
     data.type=datacon.type;
+    data.traveler_name=datacon.traveler_name;
   data.intermediatestops=datacon.intermediatestops;
   console.log("req : \t",data);
 
@@ -79,7 +90,7 @@ route.post('/save', async (req, res) => {
 
 
   route.post('/book', async (req, res) => {
-    const { from, to,date,type } = req.body;
+   
     let data = {};
     
     let datacon=req.query;
@@ -130,10 +141,12 @@ console.log("req : ",datacon);
     full.to=datacon.to;
     full.date=datacon.date;
    
-full.details=[{
+full.details={
   type:datacon.type,
   quantity:datacon.quantity
-}];
+};
+
+full.userinfo=datacon.userinfo;
 
 
  //   full.data=data;

@@ -138,6 +138,8 @@ full.details=[{
   type:datacon.type,
   quantity:datacon.quantity
 }];
+full.userinfo=datacon.userinfo;
+
 
 
  //   full.data=data;

@@ -162,6 +162,36 @@ Content-Type: application/json
 
 
 ###
+POST http://localhost:3000/bus/save
+Content-Type: application/json
+
+{
+
+"from":"loc3",
+"to":"loc4",
+"busname":"loc1 express",
+"arrivaltime":"08:00",
+"destinationtime":"16:00",
+"seats":50,
+"fare":1700,
+"totaltimeinhr":8,
+"traveler_name":"GK Travels",
+"intermediatestops":[
+    {
+    "name":"stop1"
+},
+{
+    "name":"stop2"
+}
+
+],
+"date":"26/05/2021",
+"type":"Semi-Sleeper"
+
+}
+
+###
+
 POST http://localhost:3000/bus/book
 Content-Type: application/json
 
@@ -169,15 +199,27 @@ Content-Type: application/json
 
 "from":"loc3",
 "to":"loc4",
-"BusName":"loc1 express",
-"ArrivalTime":"08:00",
-"DestinationTime":"16:00",
-"seats":50,
-"Fare":1700,
-"TotalTimeinhr":8,
-"IntermediateStops":["stop1","stop2"],
 "date":"26/05/2021",
 "type":"Semi-Sleeper",
+"quantity":2,
+"id":"132",
+"userinfo":[
+    {
+"name":"x2",
+"age":22,
+"email":"xxyz@gmail.com",
+"phone":"112333444"
+
+},
+
+    {
+"name":"x3",
+"age":22,
+"email":"xxyz@gmail.com",
+"phone":"112333444"
+
+}]
+
 
 }
 

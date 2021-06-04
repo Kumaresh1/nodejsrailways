@@ -29,6 +29,9 @@ const bdata = new mongoose.Schema({
   intermediatestops:{
     type:Array
   },
+  traveler_name:{
+    type:String
+  },
   
  date:{
       type:String,

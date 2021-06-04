@@ -238,6 +238,7 @@ console.log("data : ",regex,data);
   insdata.cost=datareq.cost;
   
   insdata.details=[datareq.details];
+  insdata.userinfo=datacon.userinfo;
 
 
 
