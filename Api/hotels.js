@@ -5,129 +5,15 @@ const imgdata = require('../DB/imgdb');
 
 const route = express.Router();
 
-var fs = require('fs');
-var path = require('path');
+function capitalize(input) {  
+  var words = input.split(' ');  
+  var CapitalizedWords = [];  
+  words.forEach(element => {  
+      CapitalizedWords.push(element[0].toUpperCase() + element.slice(1, element.length));  
+  });  
+  return CapitalizedWords.join(' ');  
+}  
 
-var multer = require('multer');
-
-
-// var storage = multer.diskStorage({
-
-
-// 	destination: (req, file, cb) => {
-
-//     cb(null, 'Api/uploads')
-// 	},
-// 	filename: (req, file, cb) => {
-// 		cb(null, file.fieldname + '-' + 1);
-//     console.log("SAVEDD");
-// 	}
-// });
-
-// var upload = multer({ storage: storage });
-
-
-
-// route.get('/', (req, res) => {
-
-//   imgdata.find({}, (err, items) => {
-//       if (err) {
-//           console.log(err);
-//           res.status(500).send('An error occurred', err);
-//       }
-//       else {
-//           res.render('ok', { items: items });
-//       }
-//   });
-// // });
-
-// route.get('/getimg', (req, res) => {
-  
-// let response={};
-
-// let searchobj={
-//   name:req.query.name+""
-// };
-
-// let count=0;
-// console.log(searchobj)
-//   imgdata.find(searchobj, (err, items) => {
-//       if (err) {
-//           console.log(err);
-//           res.status(500).send('An error occurred', err);
-//       }
-
-
-//       else {
-
-
-
-//         items.forEach(function(image) {
-// response.data={
-//   data:image.img.data.toString('base64'),
-// Name:image.name,
-// Decription:image.desc
-// }
-
-// response.Status=true;
-// response.Code=200;
-
-//         });
-
-// if(Object.keys(response).length==0){
-//   res.json({
-//     message:"Not Found",
-//     data:searchobj,
-//     "status":true,
-//     "code":200
-//   });
-// }
-// else{
-//   console.log(response.length)
-// res.json(response);
-//        } }
-//   });
-
-// });
-
-
-
-// route.post('/postimg', upload.single('image'), (req, res, next) => {
- 
-//   var obj = {
-//       name: req.body.name,
-//       desc: req.body.desc,
-//        img: {
-//            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-//            contentType: 'image/png'
-//        }
-//   }
-//   imgdata.create(obj, (err, item) => {
-//       if (err) {
-//           console.log(err);
-//       }
-//       else {
-//            item.save();
-         
-//       }
-//   });
-
-//   res.json({
-//     "data":obj,
-//     "message": "Image Saved success  "+req.body.name,
-//     "status":true,
-//     "code":200
-   
-
-//   });
-// });
-
-// route.post('/postdata', async (req, res) => {
-
-// console.log(req);
-// res.json("ppp");
-
-// });
 
 route.post('/new', async (req, res) => {
     let info = req.query;
@@ -155,7 +41,14 @@ route.post('/new', async (req, res) => {
 route.post('/search', async (req, res) => {
     let data = req.query;
     
-  console.log(req.body);
+ // console.log(req.body);
+
+  let name=data.name;
+  var regex = new RegExp(name, "i");
+
+  data.name={ '$regex' : regex}
+
+console.log("data : ",regex,data);
 
   for (var i in data){
     if(data[i]==""){
