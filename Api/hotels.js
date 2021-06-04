@@ -227,7 +227,11 @@ console.log("data : ",regex,data);
   route.post('/book',async(req,res)=>{
 
 
-    let datareq = req.query;
+    let datareq = req.body;
+console.log(datareq);
+if(datareq=={}){
+  res.json("USE DATA IN BODY");
+}
 
   
   let insdata={};

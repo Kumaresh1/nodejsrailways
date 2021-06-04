@@ -97,9 +97,12 @@ bookdata.price=datareq.price;
 bookdata.details=datareq.details;
 
 let bookingreq =datareq.Bookingdetails;
-
+var outt;
 let out=await travelsdata.find({"packages.id":bookdata.id})
-.then(result=>{})
+.then(result=>{
+  console.log("Out : ",result);
+  outt=result;
+})
 .catch(err=>{
   res.json(
     {
@@ -114,7 +117,7 @@ let out=await travelsdata.find({"packages.id":bookdata.id})
 })
 console.log("out",out);
 
-if(out == undefined){
+if(outt == undefined){
   res.json(
     {
       "data":bookdata, 
@@ -147,7 +150,7 @@ await travelsdata.updateOne(
   $push:{ bookingdetails : i_data  }
 },
   { 
-    arrayFilters: [ { "element.id": { $eq: bookdata.userid } } ]
+    arrayFilters: [ { "element.id": { $eq: bookdata.id } } ]
   }
 
 ).then(result=>{
