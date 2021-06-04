@@ -15,8 +15,6 @@ route.post('/search', async (req, res) => {
 
   data.traveler_name={ '$regex' : regex1}
 
-  
-console.log(req.body);
 
 for (var i in data){
   if(data[i]==""){
@@ -55,7 +53,6 @@ for (var i in data){
 route.post('/save', async (req, res) => {
 
 
-    const { from, to,name,start,end,totaltime,fare,date,seats,type } = req.body;
     let data = {};
 
     var datacon=req.body;

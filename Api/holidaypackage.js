@@ -49,7 +49,6 @@ route.post('/newholiday', async (req, res) => {
 route.post('/search', async (req, res) => {
     let data = req.query;
     
-  console.log(req.body);
   
     let out=await travelsdata.find(data);
 

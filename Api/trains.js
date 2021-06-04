@@ -53,9 +53,8 @@ console.log(data);
 route.post('/save', async (req, res) => {
 
 
-    const { from, to,name,start,end,totaltime,fare,date,seats,type } = req.body;
     let data = {};
-    let d_con=req.query;
+    let d_con=req.body;
     data.from=d_con.from;
     data.to=d_con.to;
     data.name=d_con.name;
@@ -86,10 +85,10 @@ route.post('/save', async (req, res) => {
 
 
 route.post('/book', async (req, res) => {
-    const { from, to,date,type } = req.body;
-    let data = {};
+   
+  let data = {};
     
-    let datacon=req.query;
+    let datacon=req.body;
 
     data.from=datacon.from;
     data.to=datacon.to;

@@ -5,18 +5,10 @@ const imgdata = require('../DB/imgdb');
 
 const route = express.Router();
 
-function capitalize(input) {  
-  var words = input.split(' ');  
-  var CapitalizedWords = [];  
-  words.forEach(element => {  
-      CapitalizedWords.push(element[0].toUpperCase() + element.slice(1, element.length));  
-  });  
-  return CapitalizedWords.join(' ');  
-}  
 
 
 route.post('/new', async (req, res) => {
-    let info = req.query;
+    let info = req.body;
     
  // console.log(info);
   

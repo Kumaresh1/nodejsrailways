@@ -15,7 +15,7 @@ function capitalize(input) {
 
 
 route.post('/newoffer', async (req, res) => {
-    let info = req.query;
+    let info = req.body;
     info.value=Number(info.value);
     
   console.log(info);
