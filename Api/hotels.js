@@ -241,7 +241,7 @@ if(datareq=={}){
   insdata.location=datareq.location;
   insdata.cost=datareq.cost;
   
-  insdata.details=[datareq.details];
+  insdata.details=datareq.details;
   insdata.userinfo=datareq.userinfo;
 
 

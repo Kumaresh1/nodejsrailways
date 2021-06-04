@@ -150,11 +150,11 @@ Content-Type: application/json
 "location":"Dubai",
 "cost":1000,
 
-"details":{
+"details":[{
  "type":"single",
   "quantity":3
     
-},
+}],
 "id":"12589577885",
 "userinfo":[
     {
