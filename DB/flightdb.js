@@ -8,7 +8,8 @@ const fdata = new mongoose.Schema({
     type: String
   },
   name: {
-    type: String
+    type: String,
+    unique:true
   },
   airlinesname: {
     type: String

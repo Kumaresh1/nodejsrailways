@@ -6,7 +6,14 @@ const route = express.Router();
 route.post('/search', async (req, res) => {
   let data = req.query;
   
-//console.log(req.body);
+  var regex = new RegExp(data.name, "i");
+
+  data.name={ '$regex' : regex}
+
+  var regex1 = new RegExp(data.airlinesname, "i");
+
+  data.airlinesname={ '$regex' : regex1}
+
 
 for (var i in data){
   if(data[i]==""){
@@ -32,7 +39,7 @@ if(out.length==0){
   res.json(
     
     {"data":out,
-    "message":"Search datas",
+    "message":"Search data sucessful",
     "status":true,
     "code":200
     }
@@ -47,13 +54,14 @@ route.post('/save', async (req, res) => {
 
 let data={};
 
-let d_con=req.query;
+let d_con=req.body;
+
     data.from=d_con.from;
     data.to=d_con.to;
     data.name=d_con.name;
-    data.airlinesName=d_con.airlinesName;
+    data.airlinesname=d_con.airlinesname;
     data.departuretime=d_con.departuretime;
-    data.destinationtime=d_con.DestinationTime;
+    data.destinationtime=d_con.Destinationtime;
     data.totaltimehr=d_con.totaltimehr;
     data.fare=d_con.fare;
     data.seats=d_con.seats;
@@ -63,28 +71,44 @@ let d_con=req.query;
   
   //console.log(data);
     let ft = new findtrains(data);
-    await ft.save();
+    await ft.save()
+    .then(result=>{
+
+      res.json(
+      
+        {
+        "message":"Saved success for "+data.name,
+      "data":data,
+      "status":true,
+      "code":200  
+      }
+        );  
+        
+
+    })
+    .catch(err=>{
+
+      res.json(
+      
+        {
+        "message":err,
+      "data":data,
+      "status":false,
+      "code":500  
+      }
+        );  
+        
+
+    })
     
-    res.json(
-      
-      {
-      "message":"Saved success for "+data.name,
-    "data":data,
-    "status":true,
-    "code":200  
-    }
-      );  
-      
+   
   });
 
 
   route.post('/book', async (req, res) => {
     
-    const { from, to,date,type } = req.body;
-    let data = {};
-    
-    let datacon=req.query;
-
+    let datacon=req.body;
+let data={};
     data.from=datacon.from;
     data.to=datacon.to;
     data.date=datacon.date;
@@ -135,6 +159,7 @@ full.details=[{
   type:datacon.type,
   quantity:datacon.quantity
 }];
+full.userinfo=datacon.userinfo;
 
 
  //   full.data=data;
@@ -169,7 +194,7 @@ route.get('/fetchall', async (req, res) => {
 console.log(req.params);
 
   let out=await findtrains.find(data);
- // console.log(data);
+ 
  
   res.json({
     "data":out,
@@ -206,7 +231,7 @@ for (let j=0;j<out.length;j++){
 
      if(out[j].bookingdetails[i].id==id )
        { 
-         console.log("iffff")
+         
          bd[k]=out[j].bookingdetails[i];
          k+=1;
        }
@@ -217,7 +242,7 @@ console.log(out[0].bookingdetails.length);
 
 if(bd.length==0){
   let response={};
-  response.Data=bd;
+  response.data=bd;
   response.status=true,
   response.message="Not Found";
   response.code=404;
@@ -227,7 +252,7 @@ if(bd.length==0){
 }
 else{
 let response={};
-response.Data=bd;
+response.data=bd;
 response.status=true,
 response.message="Found data";
 response.code=200;
@@ -236,5 +261,55 @@ response.code=200;
 
 });
 
+
+
+
+route.delete('/deleteflight',async (req,res)=>{
+
+
+let data=req.query;
+let response={};
+
+console.log(data);
+
+const deldata={};
+deldata.name=data.name;
+  let out=await findtrains.deleteOne(deldata)
+  .then(result=>{
+
+    if(result.n==0){
+    
+      response.data=data;
+response.status=false,
+response.message="No match Found ! Delete failed";
+response.code=500;
+
+
+    }
+    else{
+    response.data=data;
+response.status=true,
+response.message="Delete Successful";
+response.code=200;
+
+    }
+  })
+  .catch(err=>{
+    response.data=err;
+response.status=false,
+response.message="Delete failed";
+response.code=500;
+
+  })
+ 
+
+
+
+
+  res.json(response);  
+
+
+
+});
 
 module.exports = route;

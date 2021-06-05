@@ -21,17 +21,15 @@ Content-Type: application/json
     "from":"Delhi",
     "to":"Australia",
 
-    "Name":"Australia carrier",
-    "AirlinesName":"Jet Airways",
-    "DepartureTime":"21:20",
-    "DestinationTime":"02:05",
-    "TotalTime":22,
-    "Fare":1500,
+    "name":"Australia carrier",
+    "airlinesname":"Jet Airways",
+    "departuretime":"21:20",
+    "destinationtime":"02:05",
+    "totaltimehr":22,
+    "fare":1500,
     "seats":20,
 
     "date":"26/05/2021",
-    
-
     "type":"first class"
 }
 
@@ -39,10 +37,10 @@ Content-Type: application/json
 POST http://localhost:3000/flights/book
 Content-Type: application/json
 
-{"from": "USA",
+{   "from": "USA",
     "to": "Australia",
     "date": "29/05/2021",
-"id":"10022",
+    "id":"10022",
     "type":"first class"
 }
 ###
