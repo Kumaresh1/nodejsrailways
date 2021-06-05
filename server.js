@@ -24,6 +24,7 @@ app.use('/user', require('./Api/login'));
 app.use('/holiday', require('./Api/holidaypackage'));
 
 app.use('/offer', require('./Api/offerapi'));
+app.use('/cab', require('./Api/cab'));
 
 app.get('/',(req,res)=>
 {
