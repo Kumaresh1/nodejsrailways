@@ -215,7 +215,7 @@ route.post('/bookingforuser', async (req, res) => {
   
   let id=req.query.user_id;
   let k=0;
-  console.log(req.body.id);
+  //console.log(req.body.id);
 
   let out=await findtrains.find();
  
@@ -230,7 +230,7 @@ for (let j=0;j<out.length;j++){
 // console.log("yes",out[j].bookingdetails[i].id);
 
 
-     if(out[j].bookingdetails[i].user_id==user_id )
+     if(out[j].bookingdetails[i].user_id==id )
        { 
          
          bd[k]=out[j].bookingdetails[i];
