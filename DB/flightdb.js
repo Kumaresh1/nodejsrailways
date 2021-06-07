@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 
 const fdata = new mongoose.Schema({
+  
+  flight_num:{
+    type:Number,
+    unique:true
+  },
+  
   from: {
     type: String
   },
@@ -14,6 +20,13 @@ const fdata = new mongoose.Schema({
   airlinesname: {
     type: String
   },
+  departure_airport:{
+type:String
+  },
+
+  destination_airport:{
+    type:String
+      },
   departuretime: {
     type: String
   },
@@ -32,12 +45,11 @@ const fdata = new mongoose.Schema({
   },
   
  date:{
-      type:String,
-      default: Date.now
+      type:String
   },
+ 
   type:{
       type:String,
-      default:"Second class"
   },
   bookingdetails:{
     type:Array

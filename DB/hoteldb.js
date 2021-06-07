@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const hdata = new mongoose.Schema({
     
   hno: {
-    type: Number
+    type: Number,
+    unique:true
   },
   
 

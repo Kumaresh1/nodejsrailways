@@ -8,8 +8,10 @@ const bdata = new mongoose.Schema({
     type: String
   },
   busname: {
-    type: String
+    type: String,
+    unique:true
   },
+ 
   arrivaltime: {
     type: String
   },
@@ -40,6 +42,9 @@ const bdata = new mongoose.Schema({
   type:{
       type:String,
       default:"general"
+  },
+  seats_id:{
+    type:Array
   },
 bookingdetails:{
  type:Array

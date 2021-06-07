@@ -8,12 +8,23 @@ const data = new mongoose.Schema({
     type: String
   },
   trainname: {
-    type: String
+    type: String,
+    unique:true
+  },
+  train_id:{
+    type:String,
+    unique:true
+  },
+  departure_station:{
+    type:String
+  },
+  destination_station:{
+    type:String
   },
   arrivaltime: {
     type: String
   },
-  destinationTime: {
+  destinationtime: {
     type: String
   },
   seats: {
@@ -26,7 +37,9 @@ const data = new mongoose.Schema({
   totaltimehr: {
     type: Number
   },
-  
+  stops: {
+    type: Array
+  },
  date:{
       type:String,
       default: Date.now
@@ -35,6 +48,7 @@ const data = new mongoose.Schema({
       type:String,
       default:"general"
   },
+
   bookingdetails:{
     type:Array
    }

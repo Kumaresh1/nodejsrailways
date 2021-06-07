@@ -56,12 +56,15 @@ let data={};
 
 let d_con=req.body;
 
+data.flight_num=d_con.flight_num;
     data.from=d_con.from;
     data.to=d_con.to;
     data.name=d_con.name;
     data.airlinesname=d_con.airlinesname;
+    data.departure_airport=d_con.departure_airport;
+    data.destination_airport=d_con.destination_airport;
     data.departuretime=d_con.departuretime;
-    data.destinationtime=d_con.Destinationtime;
+    data.destinationtime=d_con.destinationtime;
     data.totaltimehr=d_con.totaltimehr;
     data.fare=d_con.fare;
     data.seats=d_con.seats;
@@ -105,7 +108,7 @@ let d_con=req.body;
   });
 
 
-  route.post('/book', async (req, res) => {
+route.post('/book', async (req, res) => {
     
     let datacon=req.body;
 let data={};
@@ -113,13 +116,14 @@ let data={};
     data.to=datacon.to;
     data.date=datacon.date;
     data.type=datacon.type;
+    data.flight_num=datacon.flight_num;
     
-    var quan_t=datacon.quantity;
-    var type_t=datacon.type;
+    var quan_t=datacon.details[0].quantity;
+    var type_t=datacon.details[0].type;
 
     let out=await findtrains.find(data);
 console.log(out);
-    if(out[0]==undefined || datacon.id==null){
+    if(out[0]==undefined || datacon.user_id==null){
       res.status("404").json(
       
         {
@@ -150,15 +154,12 @@ console.log(out);
   var myquery = data;
     let full={};
 
-    full.id=datacon.id;
+    full.user_id=datacon.user_id;
      full.from=datacon.from;
     full.to=datacon.to;
     full.date=datacon.date;
    
-full.details=[{
-  type:datacon.type,
-  quantity:datacon.quantity
-}];
+full.details=datacon.details;
 full.userinfo=datacon.userinfo;
 
 
@@ -212,7 +213,7 @@ console.log(req.params);
 route.post('/bookingforuser', async (req, res) => {
   
   
-  let id=req.query.id;
+  let id=req.query.user_id;
   let k=0;
   console.log(req.body.id);
 
@@ -229,7 +230,7 @@ for (let j=0;j<out.length;j++){
 // console.log("yes",out[j].bookingdetails[i].id);
 
 
-     if(out[j].bookingdetails[i].id==id )
+     if(out[j].bookingdetails[i].user_id==user_id )
        { 
          
          bd[k]=out[j].bookingdetails[i];

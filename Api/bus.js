@@ -56,12 +56,13 @@ route.post('/save', async (req, res) => {
     let data = {};
 
     var datacon=req.body;
+    
     data.from=datacon.from;
     data.to=datacon.to;
     data.busname=datacon.busname;
     data.arrivaltime=datacon.arrivaltime;
     data.destinationtime=datacon.destinationtime;
-    data.totaltime=datacon.totaltime;
+    data.totaltimeinhr=datacon.totaltimeinhr;
     data.fare=datacon.fare;
     data.seats=datacon.seats;
     data.date=datacon.date;
@@ -71,17 +72,36 @@ route.post('/save', async (req, res) => {
   console.log("req : \t",data);
 
     let ft = new findtrains(data);
-    await ft.save();
-    
+    await ft.save()
+    .then(result=>{
+
+
+      res.json(
+        {
+          "data":data,
+        "message":"Saved success for "+data.busname,
+        "status":true,
+        "code":200    
+  
+        }
+      );
+
+    })
+    .catch(err=>{
+
+
     res.json(
       {
-        "data":data,
-      "message":"Saved success for "+data.busname,
-      "status":true,
-      "code":200    
+        "data":err,
+      "message":"Saved Failed for "+data.busname,
+      "status":false,
+      "code":500    
 
       }
-    );  
+    );
+
+    })
+      
     
   });
 
@@ -97,12 +117,14 @@ route.post('/save', async (req, res) => {
     data.date=datacon.date;
     data.type=datacon.type;
     
-    var quan_t=datacon.quantity;
+    var quan_t=datacon.details[0].quantity;
     var type_t=datacon.type;
 
     let out=await findtrains.find(data);
-console.log("req : ",datacon);
-    if(out[0]==undefined || datacon.id==null){
+
+    console.log("req : ",datacon);
+
+    if(out[0]==undefined || datacon.user_id==null){
       res.status("404").json(
       
         {
@@ -133,14 +155,14 @@ console.log("req : ",datacon);
   var myquery = data;
     let full={};
 
-     full.id=datacon.id;
+     full.user_id=datacon.user_id;
      full.from=datacon.from;
     full.to=datacon.to;
     full.date=datacon.date;
    
 full.details=[{
   type:datacon.type,
-  quantity:datacon.quantity
+  quantity:datacon.details[0].quantity
 }];
 
 full.userinfo=datacon.userinfo;

@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const holidaydata = new mongoose.Schema({
     
   package_no:{
-    type:Number
+    type:Number,
+    unique:true
   },
   location: {
     type: String

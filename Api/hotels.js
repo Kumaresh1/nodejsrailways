@@ -11,9 +11,6 @@ route.post('/new', async (req, res) => {
     let info = req.body;
     
  // console.log(info);
-  
-
-
   let ft = new hotelsdata(info);
   await ft.save();
   
@@ -227,7 +224,7 @@ if(datareq=={}){
 
   
   let insdata={};
- insdata.id=datareq.id;
+ insdata.user_id=datareq.user_id;
   insdata.hno=datareq.hno;  
   insdata.name=datareq.name;
   insdata.location=datareq.location;
@@ -238,8 +235,8 @@ if(datareq=={}){
 
 
 
-let room_type=datareq.details.type;
-let room_quan=datareq.details.quantity;
+let room_type=datareq.details[0].type;
+let room_quan=datareq.details[0].quantity;
 
 
 
@@ -304,7 +301,7 @@ await hotelsdata.updateOne(
   route.post('/bookingforuser', async (req, res) => {
   
   
-    let id=req.query.id;
+    let id=req.query.user_id;
     let k=0;
     console.log(req.query.id);
   
@@ -321,7 +318,7 @@ await hotelsdata.updateOne(
  // console.log("yes",out[j].bookingdetails[i].id);
   
   
-        if(out[j].bookingdetails[i].id==id )
+        if(out[j].bookingdetails[i].user_id==id )
           { 
             console.log("iffff")
             bd[k]=out[j].bookingdetails[i];

@@ -55,10 +55,17 @@ route.post('/save', async (req, res) => {
 
     let data = {};
     let d_con=req.body;
+
     data.from=d_con.from;
+    data.train_id=d_con.train_id;
     data.to=d_con.to;
-    data.name=d_con.name;
-    data.airlinesname=d_con.airlinesname;
+    data.stops=d_con.stops;
+
+    data.departure_station=d_con.departure_station;
+    data.destination_station=d_con.destination_station;
+    
+    data.trainname=d_con.trainname;
+   
     data.arrivaltime=d_con.arrivaltime;
     data.destinationtime=d_con.destinationtime;
     data.totaltimehr=d_con.totaltimehr;
@@ -69,17 +76,34 @@ route.post('/save', async (req, res) => {
   
   console.log(data);
     let ft = new findtrains(data);
-    await ft.save();
+    await ft.save()
+    .then(result=>{
+
+      res.json(
+        {
+          "data":data,
+       "message": "Saved success for "+data.trainname,
+       "status":true,
+       "code":200
+       
+      
+      });
+
+    })
+    .catch(err=>{
+
+      res.status("500").json(
+        {
+          "data":data,
+       "message": "Saved Failed with err  "+err,
+       "status":false,
+       "code":500
+       
+      
+      });
+    })
     
-    res.json(
-      {
-        "data":data,
-     "message": "Saved success for "+data.name,
-     "status":true,
-     "code":200
-     
-    
-    });  
+      
     
   });
 
@@ -94,13 +118,14 @@ route.post('/book', async (req, res) => {
     data.to=datacon.to;
     data.date=datacon.date;
     data.type=datacon.type;
+    data.trainname=datacon.trainname;
     
     var quan_t=datacon.quantity;
     var type_t=datacon.type;
 
     let out=await findtrains.find(data);
 console.log(out);
-    if(out[0]==undefined || datacon.id==null){
+    if(out[0]==undefined || datacon.user_id==null){
       res.status("404").json(
       
         {
@@ -131,27 +156,28 @@ console.log(out);
   var myquery = data;
     let full={};
 
-    full.id=datacon.id;
+    full.user_id=datacon.user_id;
      full.from=datacon.from;
     full.to=datacon.to;
     full.date=datacon.date;
+    full.trainname=datacon.trainname;
    
 full.details=[{
   type:datacon.type,
-  quantity:datacon.quantity
+  quantity:datacon.quantity,
+  tier:datacon.details[0].tier,
+  source_station:datacon.details[0].source_station,
+  destination_station:datacon.details[0].destination_station
+
 }];
+
 full.userinfo=datacon.userinfo;
-
-
 
  //   full.data=data;
     
   
     var newvalues = { $set: {seats:available-quan_t },$addToSet: {bookingdetails:full } };
   
-  
-
-
     await findtrains.updateOne(myquery, newvalues, function(err, res) {
       if (err) throw err;
       console.log("1 seat updated");
@@ -194,7 +220,7 @@ console.log(req.params);
 route.post('/bookingforuser', async (req, res) => {
   
   
-  let id=req.query.id;
+  let id=req.query.user_id;
   let k=0;
   console.log(req.body.id);
 
@@ -211,7 +237,7 @@ for (let j=0;j<out.length;j++){
 // console.log("yes",out[j].bookingdetails[i].id);
 
 
-     if(out[j].bookingdetails[i].id==id )
+     if(out[j].bookingdetails[i].user_id==id )
        { 
          console.log("iffff")
          bd[k]=out[j].bookingdetails[i];

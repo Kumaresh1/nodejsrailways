@@ -18,11 +18,15 @@ POST http://localhost:3000/flights/save
 Content-Type: application/json
 
 {
+    
+    "flight_num":1,
     "from":"Delhi",
     "to":"Australia",
+    "departure_airport":"Sivaji Airport",
+    "destination_airport":"Indira Gandhi Airport",
 
     "name":"Australia carrier",
-    "airlinesname":"Jet Airways",
+    "airlinesname":"Indigo Airways",
     "departuretime":"21:20",
     "destinationtime":"02:05",
     "totaltimehr":22,
@@ -30,22 +34,78 @@ Content-Type: application/json
     "seats":20,
 
     "date":"26/05/2021",
-    "type":"first class"
+    "type":"Business class"
 }
 
 ###
 POST http://localhost:3000/flights/book
 Content-Type: application/json
 
-{   "from": "USA",
+{  
+       "flight_num":1,
+     "from": "Delhi",
     "to": "Australia",
-    "date": "29/05/2021",
-    "id":"10022",
-    "type":"first class"
+    
+    "date":"26/05/2021",
+    "type":"Business class",
+
+"user_id":"u123",
+
+"details":[{
+ "type":"first class",
+  "quantity":1
+
+    
+}],
+
+"userinfo":[
+    {
+        "name":"mm",
+        "age":22,
+        "email":"xyz@gmail.com",
+        "phone":"123344444",
+        "gender":"male"
+    }
+]
+
+
 }
 ###
 
 GET http://localhost:3000/flights/fetchall
+
+###
+POST http://localhost:3000/api/find/save
+Content-Type: application/json
+
+{
+
+  "from": "Delhi",
+    "to": "Jaipur",
+     "type": "Sleeper",
+     "trainname":"Delhi Express",
+     "train_id":"#55566",
+     "departure_station":"gandhi nagar station",
+     "destination_station":"Jaipur main station",
+    
+    "arrivaltime": "22:20",
+    "destinationtime":"04:00",
+
+    "totaltimehr": 8,
+    "fare": 500,
+    "seats": 200,
+    "date": "05/06/2021",
+    "stops":[
+        {
+            "name":"stop1"
+        },
+        {
+            "name":"stop2"
+        }
+    ]
+
+   
+}
 
 
 ###
@@ -56,32 +116,35 @@ Content-Type: application/json
    "date":"26/05/2021"
 }
 ###
-POST https://railwaytesting.herokuapp.com/api/find/book
+POST http://localhost:3000/api/find/book
 Content-Type: application/json
 
 {
 
-"from":"x1",
-"to":"x2",
-"date":"24/05/2021",
-"type":"Sleeper",
+  "from": "Delhi",
+    "to": "Jaipur",
+     "type": "Sleeper",
+     "trainname":"Delhi Express",
+
+    "date": "05/06/2021",
+
 "quantity":2,
-"id":"12333",
+"user_id":"12333",
+
+"details":[{
+"tier":"tier1 AC",
+"source_station":"station 1",
+"destination_station":"station 2"
+
+}],
 
 "userinfo":[
     {
 "name":"x2",
 "age":22,
 "email":"xxyz@gmail.com",
-"phone":"112333444"
-
-},
-
-    {
-"name":"x3",
-"age":22,
-"email":"xxyz@gmail.com",
-"phone":"112333444"
+"phone":"112333444",
+"gender":"male"
 
 }]
 
@@ -148,24 +211,32 @@ Content-Type: application/json
 "location":"Dubai",
 "cost":1000,
 
+"user_id":"12589577885",
+
 "details":[{
  "type":"single",
-  "quantity":3
+  "quantity":1,
+  "checkin_date":"26/05/2021",
+"checkout_date":"31/05/2021",
+"checkin_time":"22:00",
+"checkout_time":"01:00"
+
     
 }],
-"id":"12589577885",
+
 "userinfo":[
     {
         "name":"mm",
         "age":22,
         "email":"xyz@gmail.com",
-        "phone":"123344444"
+        "phone":"123344444",
+        "gender":"male"
     }
 ]
 
 }
 ###
-POST http://localhost:3000/hotel/bookingforuser?id=12589577885
+POST http://localhost:3000/hotel/bookingforuser?user_id=12589577885
 
 
 ###
@@ -174,14 +245,9 @@ Content-Type: application/json
 
 {
 
-"from":"Haryana",
-"to":"Bangalore",
-"BusName":"Bangalore express",
-"ArrivalTime":"08:00",
-"DestinationTime":"16:00",
-"seats":50,
-"Fare":1600
 
+"from":"loc3",
+"to":"loc4"
 }
 
 
@@ -200,6 +266,7 @@ Content-Type: application/json
 "fare":1700,
 "totaltimeinhr":8,
 "traveler_name":"GK Travels",
+
 "intermediatestops":[
     {
     "name":"stop1"
@@ -211,7 +278,6 @@ Content-Type: application/json
 ],
 "date":"26/05/2021",
 "type":"Semi-Sleeper"
-
 }
 
 ###
@@ -224,23 +290,22 @@ Content-Type: application/json
 "from":"loc3",
 "to":"loc4",
 "date":"26/05/2021",
-"type":"Semi-Sleeper",
-"quantity":2,
-"id":"132",
+ "type":"Semi-Sleeper",
+"user_id":"132",
+
+"details":[{
+   
+"quantity":2
+}],
+
 "userinfo":[
-    {
-"name":"x2",
-"age":22,
-"email":"xxyz@gmail.com",
-"phone":"112333444"
-
-},
-
-    {
+    
+{
 "name":"x3",
 "age":22,
 "email":"xxyz@gmail.com",
-"phone":"112333444"
+"phone":"112333444",
+"gender":"male"
 
 }]
 
