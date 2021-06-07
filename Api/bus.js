@@ -171,7 +171,7 @@ full.userinfo=datacon.userinfo;
  //   full.data=data;
     
   
-    var newvalues = { $set: {seats:available-quan_t },$addToSet: {bookingdetails:full } };
+    var newvalues = { $set: {seats:available-quan_t },$push: {bookingdetails:full } };
   
   
 
