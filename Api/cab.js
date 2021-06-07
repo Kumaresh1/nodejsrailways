@@ -11,6 +11,14 @@ route.post('/search', async (req, res) => {
 
   data.name={ '$regex' : regex}
 
+  var regex1 = new RegExp(data.pickup_location, "i");
+
+  data.pickup_location={ '$regex' : regex1}
+
+  var regex2 = new RegExp(data.drop_location, "i");
+
+  data.drop_location={ '$regex' : regex2}
+
 
 for (var i in data){
   if(data[i]==""){
@@ -63,6 +71,7 @@ route.post('/save', async (req, res) => {
     data.tnc=datacon.tnc;
     data.date=datacon.date;
     data.type=datacon.type;
+    data.car_details=datacon.car_details;
     data.no_of_persons=datacon.no_of_persons;
 
      console.log("req : \t",data);
@@ -116,7 +125,7 @@ route.post('/save', async (req, res) => {
 
     let out=await findtrains.find(data);
 console.log("book req : ",data);
-    if(out[0]==undefined || datacon.id==null){
+    if(out[0]==undefined || datacon.user_id==null){
       res.status("404").json(
       
         {
@@ -147,7 +156,7 @@ console.log("book req : ",data);
   var myquery = data;
     let full={};
 
-     full.id=datacon.id;
+     full.user_id=datacon.user_id;
      full.pickup_location=datacon.pickup_location;
     full.drop_location=datacon.drop_location;
     full.date=datacon.date;
@@ -224,7 +233,7 @@ console.log(req.params);
 route.post('/bookingforuser', async (req, res) => {
   
   
-  let id=req.query.id;
+  let id=req.query.user_id;
   let k=0;
   console.log(req.body.id);
 
@@ -241,7 +250,7 @@ for (let j=0;j<out.length;j++){
 // console.log("yes",out[j].bookingdetails[i].id);
 
 
-     if(out[j].bookingdetails[i].id==id )
+     if(out[j].bookingdetails[i].user_id==id )
        { 
          console.log("iffff")
          bd[k]=out[j].bookingdetails[i];

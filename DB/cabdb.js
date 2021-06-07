@@ -39,7 +39,10 @@ const bdata = new mongoose.Schema({
   },
 bookingdetails:{
  type:Array
-}
+},
+car_details:{
+  type:Array
+ }
 
 });
 
