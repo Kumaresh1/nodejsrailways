@@ -648,11 +648,78 @@ Content-Type: application/json
 
 
 
+POST http://localhost:3000/villa/new
+Content-Type: application/json
+
+{
+
+"v_no":1,
+"name":"Paradise Resorts",
+"price":"8000",
+"nb_of_persons":2,
+"rating":4,
+"city":"Bangalore",
+"location":"Yeshwanthpur",
+"image":"",
+"tags":[{"tag1":"Breakfast Complimentary"},{"tag2":"Swimming Pool"},
+{"tag3":"Free wifi"}]
+
+
+}
+
+###
+
+
+POST http://localhost:3000/villa/search
+Content-Type: application/json
+
+{
+          "nb_of_persons": 4,
+          "name":""
+
+}
+
+###
+
+POST http://localhost:3000/villa/book
+Content-Type: application/json
+
+{
+          "user_id": 122,
+          "name":"Paradise resorts",
+          "location":"Bangalore",
+          "price":8000,
+          "v_no":1,
+          "nb_of_person":2,
+          "details":[{
+              "checkin_date":"08/06/2021",
+              "checkout_date":"09/06/2021",
+              "checkin_time":"05:30PM",
+              "checkout_time":"12:30PM"
+          }],
+          "userinfo":[{
+              "name":"x3",
+                "age":22,
+                "email":"xxyz@gmail.com",
+                "phone":"112333444",
+                "gender":"male"
+
+          }]
+
+
+}
+
+###
+
+
+GET http://localhost:3000/villa/all
 
 
 
+###
 
 
+POST http://localhost:3000/villa/bookingforuser?user_id=122
 
 
 

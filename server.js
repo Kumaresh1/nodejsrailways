@@ -25,6 +25,7 @@ app.use('/holiday', require('./Api/holidaypackage'));
 
 app.use('/offer', require('./Api/offerapi'));
 app.use('/cab', require('./Api/cab'));
+app.use('/villa', require('./Api/villas'));
 
 app.get('/',(req,res)=>
 {
