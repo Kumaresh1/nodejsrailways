@@ -5,10 +5,25 @@ const route = express.Router();
 
 route.post('/search', async (req, res) => {
   let data = req.query;
+
   
   var regex = new RegExp(data.name, "i");
 
   data.name={ '$regex' : regex}
+
+  var regexf = new RegExp(data.from, "i");
+
+  data.from={ '$regex' : regexf}
+
+  var regext = new RegExp(data.to, "i");
+
+  data.to={ '$regex' : regext}
+
+  var regex = new RegExp(data.name, "i");
+
+  data.name={ '$regex' : regex}
+
+
 
   var regex1 = new RegExp(data.airlinesname, "i");
 

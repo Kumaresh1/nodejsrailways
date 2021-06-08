@@ -48,10 +48,18 @@ route.post('/newholiday', async (req, res) => {
 
 route.post('/search', async (req, res) => {
     let data = req.query;
+    var out;
     
-  
-    let out=await travelsdata.find(data);
+    if(data.starting_price!=null ||data.starting_price!=undefined){
 
+     out=await travelsdata.find({ starting_price: { $gte: data.starting_price } });
+
+    }
+else{
+  out=await travelsdata.find(data);
+
+}  
+  
     if(out.length==0){
 
   res.json(

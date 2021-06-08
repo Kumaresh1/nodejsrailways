@@ -263,7 +263,7 @@ console.log(out[0].bookingdetails.length);
 
 if(bd.length==0){
   let response={};
-  response.Data={
+  response.data={
     "id":id,
     "details":bd
     
@@ -277,7 +277,7 @@ if(bd.length==0){
 }
 else{
 let response={};
-response.Data=bd;
+response.data=bd;
 response.status=true,
 response.message="Found data";
 response.code=200;
