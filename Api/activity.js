@@ -27,7 +27,7 @@ store.city=info.city;
   let ft = new travelsdata(info);
   await ft.save().then(result=>{
 
-    console.log(store);
+    //console.log(store);
  
   res.json(
       {
@@ -40,7 +40,7 @@ store.city=info.city;
   
   })
   .catch(err=>{
-    res.json(
+    res.status("500").json(
       {
         message:err, 
   data:info,
