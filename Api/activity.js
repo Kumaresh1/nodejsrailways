@@ -65,7 +65,7 @@ store.city=info.city;
   });  
 
 route.post('/search', async (req, res) => {
-    let data = req.body;
+    let data = req.query;
     var out;
 
     var regext = new RegExp(data.name, "i");

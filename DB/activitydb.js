@@ -11,8 +11,7 @@ const villadata = new mongoose.Schema({
     type: String
   },
   name:{
-    type:String,
-    unique:true
+    type:String
   },
   sub_name:{
     type:String
