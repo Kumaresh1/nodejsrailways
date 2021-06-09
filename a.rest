@@ -721,6 +721,91 @@ GET http://localhost:3000/villa/all
 
 POST http://localhost:3000/villa/bookingforuser?user_id=122
 
+###
+
+POST http://localhost:3000/activity/new
+Content-Type: application/json
+
+{
+
+"activity_number":1,
+"name":"Nandhi Hills Trek",
+"price":"8000",
+"sub_name":"Full day trek",
+"rating":4,
+"city":"Bangalore",
+"location":"Yeshwanthpur",
+"image":"https://akm-img-a-in.tosshub.com/indiatoday/images/story/202102/toomas-tartes-Yizrl9N_eDA-unsp_1200x768.jpeg?0R7w1BDEy0JoM8KEVdkWyrsEpJJxqNv0&size=770:433",
+"tags":[{"tag":"Breakfast Lunch"},
+{"tag":"Refreshments"},
+{"tag":"Trek Gear"}
+],
+"category":"Trekking",
+"schedule":"Pickup at yeshwanthpur bus stand at 6AM,Drop at yeshwanthpur bus stand at 6PM"
+
+
+}
+
+###
+
+
+POST http://localhost:3000/activity/search
+Content-Type: application/json
+
+{
+          
+         "category":"trekking",
+"name":"nandhi Hills Trek"
+
+}
+
+###
+
+POST http://localhost:3000/activity/book
+Content-Type: application/json
+
+{
+          "user_id": 122,
+          "name":"Nandhi hills trek",
+          "location":"Yeshwanthpur",
+          "price":8000,
+          "activity_number":1,
+          "nb_of_persons":2,
+          "details":[{
+
+            "category":"Trekking"
+          }],
+          "userinfo":[{
+              "name":"Rahul",
+                "age":22,
+                "email":"xxyz@gmail.com",
+                "phone":"112333444",
+                "gender":"male"
+
+          },
+          {
+              "name":"Swetha",
+                "age":22,
+                "email":"xxyz@gmail.com",
+                "phone":"112333444",
+                "gender":"male"
+
+          }]
+
+
+}
+
+###
+
+
+GET http://localhost:3000/activity/all
+
+
+
+###
+
+
+POST http://localhost:3000/activity/bookingforuser?user_id=122
 
 
 

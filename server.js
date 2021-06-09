@@ -27,6 +27,8 @@ app.use('/offer', require('./Api/offerapi'));
 app.use('/cab', require('./Api/cab'));
 app.use('/villa', require('./Api/villas'));
 
+app.use('/activity', require('./Api/activity'));
+
 app.get('/',(req,res)=>
 {
     res.render('index')
