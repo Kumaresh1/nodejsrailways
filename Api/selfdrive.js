@@ -123,7 +123,7 @@ route.post('/save', async (req, res) => {
     var quan_t=datacon.quantity;
     var type_t=datacon.type;
 
-    let out=await findtrains.find(data);
+    let out=await findtrains.find({"car_number":data.car_number});
 console.log("book req : ",data);
     if(out[0]==undefined || datacon.user_id==null){
       res.status("404").json(
