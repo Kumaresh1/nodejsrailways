@@ -29,6 +29,8 @@ app.use('/villa', require('./Api/villas'));
 
 app.use('/activity', require('./Api/activity'));
 
+app.use('/selfdrive', require('./Api/selfdrive'));
+
 app.get('/',(req,res)=>
 {
     res.render('index')
