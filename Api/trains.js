@@ -118,7 +118,7 @@ route.post('/book', async (req, res) => {
     data.to=datacon.to;
     data.date=datacon.date;
     data.type=datacon.type;
-    data.type=datacon.fare;
+    data.fare=datacon.fare;
     data.trainname=datacon.trainname;
     
     var quan_t=datacon.quantity;
