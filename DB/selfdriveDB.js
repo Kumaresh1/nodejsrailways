@@ -19,9 +19,7 @@ const bdata = new mongoose.Schema({
   ac: {
     type: String
   },
-  time: {
-    type: String
-  },
+  
   price: {
     type: Number
   },
@@ -34,9 +32,6 @@ const bdata = new mongoose.Schema({
   },
   type: {
     type: String
-  },
-  no_of_persons:{
-    type: Number
   },
  date:{
       type:String,

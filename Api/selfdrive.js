@@ -66,15 +66,12 @@ route.post('/save', async (req, res) => {
     data.drop_location=datacon.drop_location;
     data.name=datacon.name;
     data.ac=datacon.ac;
-    data.time=datacon.time;
     data.price=datacon.price;
     data.rating=datacon.rating;
     data.tnc=datacon.tnc;
     data.date=datacon.date;
     data.type=datacon.type;
     data.car_details=datacon.car_details;
-    data.no_of_persons=datacon.no_of_persons;
-
      console.log("req : \t",data);
 
     let ft = new findtrains(data);
@@ -156,7 +153,7 @@ console.log("book req : ",data);
     });
   }
   else{
-  var myquery = data;
+  var myquery = {"car_number":data.car_number};
     let full={};
 
      full.user_id=datacon.user_id;
