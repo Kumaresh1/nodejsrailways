@@ -808,6 +808,35 @@ GET http://localhost:3000/activity/all
 POST http://localhost:3000/activity/bookingforuser?user_id=122
 
 
+###
 
+POST http://localhost:3000/selfdrive/book
+Content-Type: application/json
 
+{
+    "pickup_location" : "Yeshwanthpur Junction",
+"drop_location":"Yeshwanthpur Junction",
+"car_number":1,
+"name":"SD1",
+"date":"26/05/2021",
+"type":"Sedan",
+"time":"12:15PM",
+"quantity":1,
+"user_id":"132",
+"details":[{
+"pickup_date":"26/05/2021",
+"pickup_time":"06:00 AM",
+"dropoff_date":"28/05/2021",
+"dropoff_time":"06:00 PM"
+}],
+"userinfo":[
+    {
+"name":"Rahul",
+"age":22,
+"email":"xxyz@gmail.com",
+"phone":"112333444"
+
+}]
+
+}
 

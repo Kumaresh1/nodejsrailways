@@ -118,6 +118,7 @@ route.post('/book', async (req, res) => {
     data.to=datacon.to;
     data.date=datacon.date;
     data.type=datacon.type;
+    data.type=datacon.fare;
     data.trainname=datacon.trainname;
     
     var quan_t=datacon.quantity;
@@ -160,6 +161,7 @@ console.log(out);
      full.from=datacon.from;
     full.to=datacon.to;
     full.date=datacon.date;
+    full.fare=datacon.fare
     full.trainname=datacon.trainname;
    
 full.details=[{

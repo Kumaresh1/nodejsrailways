@@ -173,7 +173,7 @@ console.log(out);
      full.from=datacon.from;
     full.to=datacon.to;
     full.date=datacon.date;
-   
+   full.fare=datacon.fare;
 full.details=datacon.details;
 full.userinfo=datacon.userinfo;
 
