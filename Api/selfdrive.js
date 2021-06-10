@@ -161,11 +161,7 @@ console.log("book req : ",data);
     full.drop_location=datacon.drop_location;
     full.date=datacon.date;
    
-full.details=[{
-  type:datacon.type,
-  quantity:datacon.quantity,
-  time:datacon.time
-}];
+full.details=datacon.details;
 
 full.userinfo=datacon.userinfo;
 
