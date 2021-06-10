@@ -160,7 +160,7 @@ console.log("book req : ",data);
      full.pickup_location=datacon.pickup_location;
     full.drop_location=datacon.drop_location;
     full.date=datacon.date;
-   
+   full.price=datacon.price;
 full.details=datacon.details;
 
 full.userinfo=datacon.userinfo;

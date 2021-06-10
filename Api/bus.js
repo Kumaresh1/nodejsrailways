@@ -159,6 +159,7 @@ route.post('/save', async (req, res) => {
      full.from=datacon.from;
     full.to=datacon.to;
     full.date=datacon.date;
+    full.fare=datacon.fare;
    
 full.details=[{
   type:datacon.type,
