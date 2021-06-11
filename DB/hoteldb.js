@@ -35,6 +35,10 @@ const hdata = new mongoose.Schema({
       },
       images:{
         type:Array
+      },
+      rating:{
+        type:Number,
+        default:5
       }
 
 
