@@ -30,7 +30,7 @@ route.post('/new', async (req, res) => {
 
     res.json(
       {
-      "data":info,
+      "data":err,
      "message": " Saved Failed  err : "+err,
      "status":false,
      "code":500
