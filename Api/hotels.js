@@ -12,16 +12,33 @@ route.post('/new', async (req, res) => {
     
  // console.log(info);
   let ft = new hotelsdata(info);
-  await ft.save();
+  await ft.save()
+  .then(result=>{
+
+    res.json(
+      {
+      "data":info,
+     "message": "Hotel "+info.hno+ " Saved success  "+info.name,
+     "status":true,
+     "code":200
+    
+    });  
+    
+
+  })
+  .catch(err=>{
+
+    res.json(
+      {
+      "data":info,
+     "message": " Saved Failed  err : "+err,
+     "status":false,
+     "code":500
+    
+    });  
+    
+  })
   
-  res.json(
-    {
-    "data":info,
-   "message": "Hotel "+info.hno+ " Saved success  "+info.name,
-   "status":true,
-   "code":200
-  
-  });  
   
   });
 
@@ -75,142 +92,6 @@ console.log("data : ",regex,data);
 
 
   });
-
-// route.post('/book', async (req, res) => {
-   
-//     let datareq = req.body;
-//   let bookdata={};
-//   bookdata.hno=datareq.hno;  
-// bookdata.name=datareq.name;
-// bookdata.location=datareq.location;
-// bookdata.cost=datareq.cost;
-
-// let insdata={};
-// insdata.id=datareq.id;
-// insdata.hno=datareq.hno;  
-// insdata.name=datareq.name;
-// insdata.location=datareq.location;
-// insdata.cost=datareq.cost;
-
-// insdata.details=[datareq.details];
-// let bookingreq =datareq.details;
-
-
-//   console.log("Booking req\n",bookingreq);
-
-//   var rtype,rc;  
-//   for (var i in bookingreq)
-//   {
-//         rtype=i;
-//         rc=bookingreq[i];
-//         break;
-//   }
-
-
-//     let out=await hotelsdata.find(bookdata);
-    
-
-//    if(out.length==0){
-//     res.json(
-        
-//       {"data":out,
-//       "message":"Not found ! Booking failed",
-//       "status":true,
-//       "code":404
-//       }
-//       );  
-//    }
-
-//    else{
-
-// let tot_room=out[0].totalrooms;
-
-// let new_tot=tot_room;
-
-// console.log("total room ",tot_room);
-
-// let checkroom={};
-// for(let t=0;t<tot_room.length;tot_room++){
-
-//   console.log("tttt : ",tot_room[t]);
-
-// if(tot_room[t].type==rc){
-  
-//  checkroom=tot_room[t];
- 
-//  savetotal=tot_room[t];
- 
-//  console.log("savee : -------> ",savetotal);
- 
-//  break;
-// }
-// }
-
-  
-//     var atype,ac;  
-//    for (var j in checkroom)
-//    {
-    
-//         if(j==rtype && checkroom[j]==rc){
-            
-//             if(checkroom["available"]==0)
-//             {
-//                 res.json(
-        
-//                   {"data":out[0],
-//                   "message":"Room full",
-//                   "status":true,
-//                   "code":200
-//                   }
-//                   );
-            
-//             }
-//             else{
-
-              
-//                 //book update booking details and minus room
-                
-
-//                 var myquery = bookdata;
-
-
-//                 let full=insdata;
-
-               
-
-//                 console.log("savetotal.avai ",out[0].totalrooms)
-//              //   savetotal.available=12;
-//                 console.log("thiss erooeee  :  ",savetotal)
-//               savetotal.available-=datareq.details.quantity;
-//                 // Availablerooms:checkroom,Bookingdetails:{j:checkroom[j]}}
-//                 var newvalues = { $set: {totalrooms:savetotal},$addToSet: {bookingdetails:full } };
-//                 await hotelsdata.updateOne(myquery, newvalues, function(err, res) {
-//                   if (err) throw err;
-
-//                   console.log("\n\tRoom updated");
-                 
-//                   //res.json(out);  
-//                 });
-//             }
-
-//         }
-
-//    }
-//    res.json(
-//     {
-//       "data":insdata, 
-//     message:"Booked successfully",
-//     "status":true,
-//     "code":200
-    
-//     }
-//     );
-
-//   //  console.log(out);
-    
- 
-// }
-//   });
 
 
   route.post('/book',async(req,res)=>{
