@@ -168,7 +168,7 @@ out[0].seat_numbers.forEach(element => {
 flag=true;
     res.json({
       "data":datacon,
-     "message": "Seat Full",
+     "message": "Seat Ocuupied",
      "status":false,
      "code":400
      
