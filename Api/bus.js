@@ -156,6 +156,22 @@ route.post('/save', async (req, res) => {
     });
   }
   else{
+
+out[0].seat_numbers.forEach(element => {
+
+  if(element[datacon.seatno]==true]){
+    return res.json({
+      "data":datacon,
+     "message": "Seat Full",
+     "status":false,
+     "code":400
+     
+    });
+
+  }
+  
+});
+
   var myquery = data;
     let full={};
 
@@ -172,6 +188,7 @@ full.details=[{
 }];
 
 full.userinfo=datacon.userinfo;
+
 
 
  //   full.data=data;
@@ -195,13 +212,29 @@ full.userinfo=datacon.userinfo;
     
     ).then(result=>{
 
-      res.json({
-        "data":result,
-       "message": "Seats Updated",
-       "status":true,
-       "code":200
-       
-      });
+
+      if(result.nModified==1){
+      
+        res.json({
+          "data":data,
+         "message": "Seats Updated",
+         "status":true,
+         "code":200
+         
+        });
+
+      }else{
+
+        res.json({
+          "data":datacon,
+         "message": "No Seats Updated",
+         "status":false,
+         "code":500
+         
+        });
+
+      }
+
 
     })
     .catch(err=>{
