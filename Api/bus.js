@@ -125,7 +125,7 @@ route.post('/save', async (req, res) => {
 
     let out=await findtrains.find(data);
 
-    console.log("req : ",datacon);
+    //console.log("req : ",datacon);
 
     if(out[0]==undefined || datacon.user_id==null){
       
@@ -157,10 +157,16 @@ route.post('/save', async (req, res) => {
   }
   else{
 
+var flag;
+    
 out[0].seat_numbers.forEach(element => {
 
-  if(element[datacon.seatno]==true]){
-    return res.json({
+  console.log(element.name,datacon.details[0].seatno)
+  
+  if(element.name==datacon.details[0].seatno && element.filled==true){
+ 
+flag=true;
+    res.json({
       "data":datacon,
      "message": "Seat Full",
      "status":false,
@@ -172,6 +178,7 @@ out[0].seat_numbers.forEach(element => {
   
 });
 
+if(!flag){
   var myquery = data;
     let full={};
 
@@ -253,7 +260,8 @@ full.userinfo=datacon.userinfo;
     
   }
 
-    }
+
+      }  }
 });
 
 

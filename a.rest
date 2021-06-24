@@ -857,7 +857,7 @@ Content-Type: application/json
 "fare":1700,
 
 "details":[{
-"seatno":"L-2",   
+"seatno":"L-3",   
 "quantity":1
 }],
 
