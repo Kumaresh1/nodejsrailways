@@ -117,7 +117,7 @@ route.post('/save', async (req, res) => {
     data.to=datacon.to;
     data.date=datacon.date;
     data.type=datacon.type;
-    data.seatno=datacon.seatno;
+    data.seatno=datacon.details[0].seatno;
 
     let seatnos=datacon.seatno;
     
@@ -129,6 +129,7 @@ route.post('/save', async (req, res) => {
     console.log("req : ",datacon);
 
     if(out[0]==undefined || datacon.user_id==null){
+      
       res.status("404").json(
       
         {
