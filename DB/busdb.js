@@ -43,8 +43,11 @@ const bdata = new mongoose.Schema({
       type:String,
       default:"general"
   },
+  
   seat_numbers:{
+   
     type:Array
+  
   },
 bookingdetails:{
  type:Array

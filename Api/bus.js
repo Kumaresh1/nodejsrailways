@@ -67,18 +67,19 @@ route.post('/save', async (req, res) => {
     data.seats=datacon.seats;
     data.date=datacon.date;
     data.type=datacon.type;
+    data.seat_numbers=datacon.seat_numbers;
     data.traveler_name=datacon.traveler_name;
   data.intermediatestops=datacon.intermediatestops;
   console.log("req : \t",data);
 
-    let ft = new findtrains(data);
+    let ft = new findtrains(datacon);
     await ft.save()
     .then(result=>{
 
 
       res.json(
         {
-          "data":data,
+          "data":result,
         "message":"Saved success for "+data.busname,
         "status":true,
         "code":200    
