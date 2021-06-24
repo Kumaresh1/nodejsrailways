@@ -117,8 +117,7 @@ route.post('/save', async (req, res) => {
     data.to=datacon.to;
     data.date=datacon.date;
     data.type=datacon.type;
-    data.seatno=datacon.details[0].seatno;
-
+    
     let seatnos=datacon.seatno;
     
     var quan_t=datacon.details[0].quantity;
@@ -165,7 +164,7 @@ route.post('/save', async (req, res) => {
     full.to=datacon.to;
     full.date=datacon.date;
     full.fare=datacon.fare;
-    full.seatno=datacon.seatno
+    full.seatno=datacon.details[0].seatno
    
 full.details=[{
   type:datacon.type,
@@ -189,7 +188,7 @@ full.userinfo=datacon.userinfo;
       $push: {bookingdetails:full }
     },
       { 
-        arrayFilters: [ { "element.name": { $eq: data.seatno } } ]
+        arrayFilters: [ { "element.name": { $eq: data.details[0].seatno } } ]
       }
     
     ).then(result=>{
