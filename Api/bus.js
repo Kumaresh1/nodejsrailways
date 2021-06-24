@@ -183,12 +183,14 @@ full.userinfo=datacon.userinfo;
     await findtrains.updateOne(
 
       myquery,
-      { $set: { "seat_numbers.$[element].filled" : true },
-      $set: {seats:available-quan_t },
-      $push: {bookingdetails:full }
+      {
+        $inc: {seats:-quan_t },
+      $push: {bookingdetails:full} , 
+        $set: { "seat_numbers.$[element].filled" : true },
+      
     },
       { 
-        arrayFilters: [ { "element.name": { $eq: data.details[0].seatno } } ]
+        arrayFilters: [ { "element.name": { $eq: datacon.details[0].seatno } } ]
       }
     
     ).then(result=>{
