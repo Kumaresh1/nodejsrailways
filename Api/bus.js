@@ -118,6 +118,8 @@ route.post('/save', async (req, res) => {
     data.date=datacon.date;
     data.type=datacon.type;
     data.seatno=datacon.seatno;
+
+    let seatnos=datacon.seatno;
     
     var quan_t=datacon.details[0].quantity;
     var type_t=datacon.type;
@@ -144,7 +146,7 @@ route.post('/save', async (req, res) => {
   console.log("Available : "+out[0].seats);
 
   let available=out[0].seats;
-  if(available==0){
+  if(available==0 ){
     res.json({
       "data":data,
      "message": "Seats are full",
@@ -162,6 +164,7 @@ route.post('/save', async (req, res) => {
     full.to=datacon.to;
     full.date=datacon.date;
     full.fare=datacon.fare;
+    full.seatno=datacon.seatno
    
 full.details=[{
   type:datacon.type,
@@ -177,20 +180,42 @@ full.userinfo=datacon.userinfo;
     var newvalues = { $set: {seats:available-quan_t },$push: {bookingdetails:full } };
   
   
+    await findtrains.updateOne(
 
+      myquery,
+      { $set: { "seat_numbers.$[element].filled" : true },
+      $set: {seats:available-quan_t },
+      $push: {bookingdetails:full }
+    },
+      { 
+        arrayFilters: [ { "element.name": { $eq: data.seatno } } ]
+      }
+    
+    ).then(result=>{
 
-    await findtrains.updateOne(myquery, newvalues, function(err, res) {
-      if (err) throw err;
-      console.log("1 seat updated");
-      
-    });
-    res.json({
-      "data":full,
-     "message": "Seats Updated",
-     "status":true,
-     "code":200
-     
-    });
+      res.json({
+        "data":result,
+       "message": "Seats Updated",
+       "status":true,
+       "code":200
+       
+      });
+
+    })
+    .catch(err=>{
+
+      res.json({
+        "data":err,
+       "message": "No Seats Updated",
+       "status":false,
+       "code":400
+       
+      });
+
+    })
+
+    
+    
   }
 
     }
