@@ -116,6 +116,7 @@ route.post('/save', async (req, res) => {
     data.to=datacon.to;
     data.date=datacon.date;
     data.type=datacon.type;
+    data.seatno=datacon.seatno;
     
     var quan_t=datacon.details[0].quantity;
     var type_t=datacon.type;

@@ -43,7 +43,7 @@ const bdata = new mongoose.Schema({
       type:String,
       default:"general"
   },
-  seats_id:{
+  seat_numbers:{
     type:Array
   },
 bookingdetails:{
